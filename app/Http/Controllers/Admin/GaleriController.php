@@ -42,6 +42,7 @@ class GaleriController extends Controller
         $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
         $path = $gambar->storeAs($folder, $filename, 'public');
         $gambarPath = str_replace('public/', 'storage/', $path);
+        $urlGambar = asset($gambarPath);
 
         // Format tanggal_foto
         $tanggal_foto = null;
@@ -52,12 +53,15 @@ class GaleriController extends Controller
         // Simpan ke database
         Galeri::create([
             'judul' => $request->judul,
+            'slug' => $this->generateSlug($request->judul),
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambarPath,
+            'url_gambar' => $urlGambar,
             'lokasi' => $request->lokasi,
             'tanggal_foto' => $tanggal_foto,
             'status' => $request->has('status') ? 1 : 0,
+            'views' => 0,
         ]);
 
         return redirect()->route('admin.galeri.index')
@@ -92,6 +96,7 @@ class GaleriController extends Controller
 
         $data = [
             'judul' => $request->judul,
+            'slug' => $this->generateSlug($request->judul, $galeri->id),
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'lokasi' => $request->lokasi,
@@ -113,12 +118,28 @@ class GaleriController extends Controller
             $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
             $path = $gambar->storeAs($folder, $filename, 'public');
             $data['gambar'] = str_replace('public/', 'storage/', $path);
+            $data['url_gambar'] = asset($data['gambar']);
         }
 
         $galeri->update($data);
 
         return redirect()->route('admin.galeri.index')
             ->with('success', 'Galeri berhasil diupdate');
+    }
+
+    private function generateSlug(string $judul, ?int $ignoreId = null): string
+    {
+        $slug = Str::slug($judul);
+        $query = Galeri::where('slug', $slug);
+        if ($ignoreId) {
+            $query->where('id', '<>', $ignoreId);
+        }
+
+        if ($query->exists()) {
+            $slug = $slug . '-' . time();
+        }
+
+        return $slug;
     }
 
     public function destroy($id)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BeritaController extends Controller
@@ -32,19 +33,23 @@ class BeritaController extends Controller
             'tanggal_terbit' => 'required',
         ]);
 
+        // Upload gambar ke storage
         $gambar = $request->file('gambar');
-        $namaGambar = time() . '_' . $gambar->getClientOriginalName();
-        $gambar->move(public_path('uploads/berita'), $namaGambar);
+        $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
+        $path = $gambar->storeAs('berita', $filename, 'public');
+        $gambarPath = str_replace('public/', 'storage/', $path);
 
         Berita::create([
             'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
+            'slug' => $this->generateSlug($request->judul),
             'konten' => $request->konten,
-            'gambar' => 'uploads/berita/' . $namaGambar,
+            'gambar' => $gambarPath,
             'kategori_id' => $request->kategori_id,
             'penulis' => $request->penulis ?? 'Admin',
             'tanggal_terbit' => $request->tanggal_terbit,
             'status' => $request->has('status'),
+            'views' => 0,
+            'komentar' => 0,
         ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan!');
@@ -70,7 +75,7 @@ class BeritaController extends Controller
 
         $data = [
             'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
+            'slug' => $this->generateSlug($request->judul, $berita->id),
             'konten' => $request->konten,
             'kategori_id' => $request->kategori_id,
             'penulis' => $request->penulis ?? 'Admin',
@@ -78,14 +83,19 @@ class BeritaController extends Controller
             'status' => $request->has('status'),
         ];
 
+        // Upload gambar baru jika ada
         if ($request->hasFile('gambar')) {
-            if ($berita->gambar && file_exists(public_path($berita->gambar))) {
-                unlink(public_path($berita->gambar));
+            // Hapus gambar lama
+            $oldPath = str_replace('storage/', 'public/', $berita->gambar);
+            if (Storage::exists($oldPath)) {
+                Storage::delete($oldPath);
             }
+
+            // Upload gambar baru
             $gambar = $request->file('gambar');
-            $namaGambar = time() . '_' . $gambar->getClientOriginalName();
-            $gambar->move(public_path('uploads/berita'), $namaGambar);
-            $data['gambar'] = 'uploads/berita/' . $namaGambar;
+            $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
+            $path = $gambar->storeAs('berita', $filename, 'public');
+            $data['gambar'] = str_replace('public/', 'storage/', $path);
         }
 
         $berita->update($data);
@@ -96,10 +106,29 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         $berita = Berita::findOrFail($id);
-        if ($berita->gambar && file_exists(public_path($berita->gambar))) {
-            unlink(public_path($berita->gambar));
+        
+        // Hapus file gambar
+        $gambarPath = str_replace('storage/', 'public/', $berita->gambar);
+        if (Storage::exists($gambarPath)) {
+            Storage::delete($gambarPath);
         }
+        
         $berita->delete();
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
+    }
+
+    private function generateSlug(string $judul, ?int $ignoreId = null): string
+    {
+        $slug = Str::slug($judul);
+        $query = Berita::where('slug', $slug);
+        if ($ignoreId) {
+            $query->where('id', '<>', $ignoreId);
+        }
+
+        if ($query->exists()) {
+            $slug = $slug . '-' . time();
+        }
+
+        return $slug;
     }
 }

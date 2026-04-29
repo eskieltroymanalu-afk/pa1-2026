@@ -11,4 +11,9 @@ class Informasi extends Model
     
     protected $table = 'informasi';
     protected $fillable = ['judul', 'slug', 'konten', 'gambar', 'kategori', 'penulis', 'status', 'views'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

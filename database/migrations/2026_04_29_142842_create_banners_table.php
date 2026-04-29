@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galeris', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('judul', 255);
-            $table->string('kategori', 100);
+            $table->string('judul');
             $table->text('deskripsi')->nullable();
-            $table->string('gambar', 255);
-            $table->string('lokasi', 255)->nullable();
-            $table->date('tanggal_foto')->nullable();
+            $table->string('gambar');
+            $table->string('url_gambar');
+            $table->string('link')->nullable();
+            $table->integer('urutan')->default(0);
             $table->boolean('status')->default(true);
             $table->timestamps();
-            
-            // Index untuk mempercepat pencarian
-            $table->index('kategori');
-            $table->index('status');
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galeris');
+        Schema::dropIfExists('banners');
     }
 };

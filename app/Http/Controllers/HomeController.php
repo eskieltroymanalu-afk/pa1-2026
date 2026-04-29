@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeri;
 use App\Models\Berita;
+use App\Models\Banner;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,7 @@ class HomeController extends Controller
 {
     $galeri = Galeri::latest()->take(6)->get();
 $berita = Berita::with('kategori')->latest()->take(3)->get();
+    $banners = Banner::where('status', true)->orderBy('urutan')->get();
     
     $destinasi = [
         (object)[
@@ -33,6 +35,6 @@ $berita = Berita::with('kategori')->latest()->take(3)->get();
         ]
     ];
     
-    return view('pages.home', compact('galeri', 'berita', 'destinasi'));
+    return view('pages.home', compact('galeri', 'berita', 'destinasi', 'banners'));
     }
 }

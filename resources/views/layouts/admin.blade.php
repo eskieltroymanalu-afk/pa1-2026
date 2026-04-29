@@ -313,6 +313,9 @@
             <a href="{{ route('admin.informasi.index') }}" class="{{ request()->routeIs('admin.informasi.*') ? 'active' : '' }}">
                 <i class="fas fa-info-circle"></i> Informasi
             </a>
+            <a href="{{ route('admin.banner.index') }}" class="{{ request()->routeIs('admin.banner.*') ? 'active' : '' }}">
+                <i class="fas fa-image"></i> Banner
+            </a>
         </div>
     </div>
     

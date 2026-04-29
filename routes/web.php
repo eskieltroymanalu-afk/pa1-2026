@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\InformasiController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\HomeController;
 
@@ -111,6 +112,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('galeri', GaleriController::class)->names('admin.galeri');
     Route::resource('berita', BeritaController::class)->names('admin.berita');
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
+    Route::resource('banner', BannerController::class)->names('admin.banner');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
 
     
