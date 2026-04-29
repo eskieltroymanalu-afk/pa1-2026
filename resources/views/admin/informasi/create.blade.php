@@ -42,7 +42,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('admin.galeri.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.informasi.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

@@ -12,14 +12,18 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug')->unique();
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->string('gambar');
+            $table->string('url_gambar')->nullable();
             $table->string('kategori');
             $table->string('lokasi')->nullable();
             $table->date('tanggal_foto')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('views')->default(0);
             $table->timestamps();
+
+            $table->index('kategori');
+            $table->index('status');
         });
     }
 

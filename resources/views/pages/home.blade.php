@@ -180,11 +180,7 @@
     }
     
     /* Overlay biru gradasi pada slide */
-    .slide-1 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/B1.jpeg'); }
-    .slide-2 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/B2.jpeg'); }
-    .slide-3 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/B5.jpeg'); }
-    .slide-4 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/B4.jpeg'); }
-    .slide-5 { background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('/image/DSC_0095.jpg'); }
+    /* Banner images are now loaded dynamically from database */
     
     .hero-content {
         position: absolute;
@@ -672,29 +668,63 @@
     <!-- ==================== HERO SLIDER ==================== -->
     <section class="hero-section" id="home">
         <div class="slides-container">
-            <div class="slide slide-1 active"></div>
-            <div class="slide slide-2"></div>
-            <div class="slide slide-3"></div>
-            <div class="slide slide-4"></div>
-            <div class="slide slide-5"></div>
+            @if($banners->count() > 0)
+                @foreach($banners as $index => $banner)
+                    <div class="slide {{ $index === 0 ? 'active' : '' }}" style="background-image: linear-gradient(rgba(0, 51, 102, 0.5), rgba(0, 102, 153, 0.3)), url('{{ asset($banner->url_gambar) }}');">
+                        @if($banner->judul || $banner->deskripsi)
+                            <div class="hero-content">
+                                <div>
+                                    @if($banner->judul)
+                                        <h1 class="hero-title">{{ $banner->judul }}</h1>
+                                    @endif
+                                    @if($banner->deskripsi)
+                                        <div class="hero-subtitle">{{ $banner->deskripsi }}</div>
+                                    @endif
+                                    <div class="hero-divider"></div>
+                                    @if($banner->link)
+                                        <a href="{{ $banner->link }}" class="hero-btn">Jelajahi Sekarang</a>
+                                    @else
+                                        <a href="#destinasi" class="hero-btn">Jelajahi Sekarang</a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback to static slides if no banners -->
+                <div class="slide slide-1 active"></div>
+                <div class="slide slide-2"></div>
+                <div class="slide slide-3"></div>
+                <div class="slide slide-4"></div>
+                <div class="slide slide-5"></div>
+            @endif
         </div>
         
         <div class="slider-dots">
-            <div class="dot active" data-slide="0"></div>
-            <div class="dot" data-slide="1"></div>
-            <div class="dot" data-slide="2"></div>
-            <div class="dot" data-slide="3"></div>
-            <div class="dot" data-slide="4"></div>
+            @if($banners->count() > 0)
+                @foreach($banners as $index => $banner)
+                    <div class="dot {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}"></div>
+                @endforeach
+            @else
+                <div class="dot active" data-slide="0"></div>
+                <div class="dot" data-slide="1"></div>
+                <div class="dot" data-slide="2"></div>
+                <div class="dot" data-slide="3"></div>
+                <div class="dot" data-slide="4"></div>
+            @endif
         </div>
         
-        <div class="hero-content">
-            <div>
-                <div class="hero-subtitle"> Global Geopark</div>
-                <h1 class="hero-title"> MUARA · SIBANDANG
-                <div class="hero-divider"></div>
-                <a href="#destinasi" class="hero-btn">Jelajahi Sekarang</a>
+        @if($banners->count() === 0)
+            <div class="hero-content">
+                <div>
+                    <div class="hero-subtitle"> Global Geopark</div>
+                    <h1 class="hero-title"> MUARA · SIBANDANG
+                    <div class="hero-divider"></div>
+                    <a href="#destinasi" class="hero-btn">Jelajahi Sekarang</a>
+                </div>
             </div>
-        </div>
+        @endif
         
         <div class="scroll-indicator" onclick="document.getElementById('destinasi').scrollIntoView({behavior:'smooth'})">
             <span>SCROLL</span>

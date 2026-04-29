@@ -10,22 +10,31 @@ class Galeri extends Model
 {
     use HasFactory;
 
-    protected $table = 'galeris';
+    protected $table = 'galeri';
     
     protected $fillable = [
         'judul',
-        'kategori',
+        'slug',
         'deskripsi',
         'gambar',
+        'url_gambar',
+        'kategori',
         'lokasi',
         'tanggal_foto',
-        'status'
+        'status',
+        'views',
     ];
 
     protected $casts = [
         'status' => 'boolean',
-        'tanggal_foto' => 'date'
+        'tanggal_foto' => 'date',
+        'views' => 'integer',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     // Helper untuk mendapatkan path folder berdasarkan kategori
     public static function getPathByKategori($kategori)
