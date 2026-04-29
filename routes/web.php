@@ -5,15 +5,20 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\InformasiController;
+use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\HomeController;
+
 
 // ==================== FRONTEND ROUTES ====================
 
+
+// Destinasi Routes
+Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
+Route::get('/destinasi/alam', [DestinasiController::class, 'alam'])->name('destinasi.alam');
+Route::get('/destinasi/buatan', [DestinasiController::class, 'buatan'])->name('destinasi.buatan');
+Route::get('/destinasi/budaya', [DestinasiController::class, 'budaya'])->name('destinasi.budaya');
 // Home
-Route::get('/', function () {
-    $galeri = App\Models\Galeri::where('status', true)->latest()->take(6)->get();
-    $berita = App\Models\Berita::with('kategori')->where('status', true)->latest()->take(3)->get();
-    return view('pages.home', compact('galeri', 'berita'));
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Informasi
 Route::get('/informasi', function () {
@@ -22,15 +27,39 @@ Route::get('/informasi', function () {
 })->name('informasi');
 
 // Destinasi
-Route::get('/destinasi', function () {
-    return view('pages.destinasi');
-})->name('destinasi');
+Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
+
+// Detail Destinasi (jika masih pakai ID)
+Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
+
+// ==================== GEOSITE ROUTES (TIGA GEOSITE) ====================
+Route::get('/geosite/muara', function () {
+    return view('geosite.muara');
+})->name('geosite.muara');
+
+Route::get('/geosite/sibandang', function () {
+    return view('geosite.sibandang');
+})->name('geosite.sibandang');
+
+Route::get('/geosite/sampuran', function () {
+    return view('geosite.sampuran');
+})->name('geosite.sampuran');
+
+Route::get('/geosite/papande', function () {
+    return view('geosite.papande');
+})->name('geosite.papande');
 
 // Galeri
 Route::get('/galeri', function () {
-    $galeri = App\Models\Galeri::where('status', true)->latest()->paginate(12);
+    $galeri = App\Models\Galeri::latest()->paginate(12);
     return view('pages.galeri', compact('galeri'));
 })->name('galeri');
+
+
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::resource('galeri', GaleriController::class);
+});
 
 // Berita
 Route::get('/berita', function () {
@@ -52,6 +81,12 @@ Route::get('/galeri/{slug}', function ($slug) {
     $galeri->increment('views');
     return view('pages.galeri-detail', compact('galeri'));
 })->name('galeri.detail');
+
+// UMKM
+Route::get('/umkm', [HomeController::class, 'umkm'])->name('umkm');
+
+// Budaya
+Route::get('/budaya', [HomeController::class, 'budaya'])->name('budaya');
 
 // Kontak
 Route::get('/kontak', function () {
@@ -77,4 +112,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('berita', BeritaController::class)->names('admin.berita');
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
+
+    
 });
