@@ -181,35 +181,27 @@ body {
 
         <div class="spotlight-wrapper">
             <div class="spotlight-track">
-
-                <div class="story-card" onclick="openLightbox(0)">
-                    <img src="/image/meat/galeri/1.jpg">
-                    <div class="story-text"><h3>Pantai Muara</h3></div>
-                </div>
-
-                <div class="story-card" onclick="openLightbox(1)">
-                    <img src="/image/meat/galeri/2.jpg">
-                    <div class="story-text"><h3>Sunset View</h3></div>
-                </div>
-
-                <div class="story-card" onclick="openLightbox(2)">
-                    <img src="/image/batu-bahisan/galeri/1.jpg">
-                    <div class="story-text"><h3>Batu Bahisan</h3></div>
-                </div>
-
-                <div class="story-card" onclick="openLightbox(3)">
-                    <img src="/image/liang-sipege/galeri/1.jpg">
-                    <div class="story-text"><h3>Liang Sipege</h3></div>
-                </div>
-
-                <div class="story-card" onclick="openLightbox(4)">
-                    <img src="/image/meat/galeri/3.jpg">
-                    <div class="story-text"><h3>Hidden Beach</h3></div>
-                </div>
-
+                @if($galeri->count())
+                    @foreach($galeri as $item)
+                        <div class="story-card" onclick="openLightbox({{ $loop->index }})">
+                            <img src="{{ asset($item->gambar) }}" alt="{{ $item->judul }}">
+                            <div class="story-text">
+                                <h3>{{ $item->judul }}</h3>
+                                <p>{{ \Illuminate\Support\Str::limit($item->deskripsi ?? '', 60) }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="p-4 text-center" style="width:100%;">
+                        <p>Tidak ada foto galeri saat ini. Kembali lagi nanti.</p>
+                    </div>
+                @endif
             </div>
         </div>
 
+        <div class="mt-4">
+            {{ $galeri->links() }}
+        </div>
     </div>
 </section>
 
@@ -241,13 +233,13 @@ body {
 
 <!-- ===================== SCRIPT ===================== -->
 <script>
-const images = [
-    {src:'/image/meat/galeri/1.jpg', desc:'Pantai Muara'},
-    {src:'/image/meat/galeri/2.jpg', desc:'Sunset View'},
-    {src:'/image/batu-bahisan/galeri/1.jpg', desc:'Batu Bahisan'},
-    {src:'/image/liang-sipege/galeri/1.jpg', desc:'Liang Sipege'},
-    {src:'/image/meat/galeri/3.jpg', desc:'Hidden Beach'}
-];
+const images = @json($galeri->map(function($item) {
+    return [
+        'src' => asset($item->gambar),
+        'desc' => $item->judul ?: ($item->deskripsi ?? 'Galeri Foto'),
+    ];
+}));
+
 window.addEventListener("load", function () {
     const frame = document.getElementById("bg-music");
 
