@@ -44,7 +44,10 @@
             <div class="mb-3">
                 <label>Gambar Saat Ini</label><br>
                 <img src="{{ asset($berita->gambar) }}" width="100" class="mb-2">
-                <input type="file" name="gambar" class="form-control" accept="image/*">
+                <input type="file" id="gambar" name="gambar" class="form-control" accept="image/*">
+                <div class="mt-3">
+                    <img id="beritaPreview" src="#" alt="Preview Gambar Baru" class="img-fluid rounded d-none" style="max-width: 100%; max-height: 300px;" />
+                </div>
             </div>
             
             <div class="mb-3">
@@ -59,4 +62,16 @@
         </form>
     </div>
 </div>
+<script>
+    document.getElementById('gambar').addEventListener('change', function (e) {
+        const preview = document.getElementById('beritaPreview');
+        const file = e.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('d-none');
+        } else {
+            preview.classList.add('d-none');
+        }
+    });
+</script>
 @endsection
