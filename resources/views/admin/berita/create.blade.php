@@ -43,7 +43,10 @@
             
             <div class="mb-3">
                 <label>Gambar <span class="text-danger">*</span></label>
-                <input type="file" name="gambar" class="form-control" accept="image/*" required>
+                <input type="file" id="gambar" name="gambar" class="form-control" accept="image/*" required>
+                <div class="mt-3">
+                    <img id="beritaPreview" src="#" alt="Preview Gambar Berita" class="img-fluid rounded d-none" style="max-width: 100%; max-height: 300px;" />
+                </div>
             </div>
             
             <div class="mb-3">
@@ -58,4 +61,16 @@
         </form>
     </div>
 </div>
+<script>
+    document.getElementById('gambar').addEventListener('change', function (e) {
+        const preview = document.getElementById('beritaPreview');
+        const file = e.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('d-none');
+        } else {
+            preview.classList.add('d-none');
+        }
+    });
+</script>
 @endsection
