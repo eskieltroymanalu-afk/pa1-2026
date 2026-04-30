@@ -52,7 +52,7 @@ Route::get('/geosite/papande', function () {
 
 // Galeri
 Route::get('/galeri', function () {
-    $galeri = App\Models\Galeri::latest()->paginate(12);
+    $galeri = App\Models\Galeri::where('status', true)->latest()->paginate(12);
     return view('pages.galeri', compact('galeri'));
 })->name('galeri');
 
