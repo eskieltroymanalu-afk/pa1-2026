@@ -28,7 +28,6 @@ class GaleriController extends Controller
         // Validasi
         $request->validate([
             'judul' => 'required|string|max:255',
-            'kategori' => 'required|in:Meat,Batu Bahisan,Liang Sipege,Balige',
             'deskripsi' => 'required|string',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'lokasi' => 'nullable|string',
@@ -38,10 +37,10 @@ class GaleriController extends Controller
 
         // Upload gambar
         $gambar = $request->file('gambar');
-        $folder = Galeri::getPathByKategori($request->kategori);
+        $folder = 'image/galeri';
         $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
         $path = $gambar->storeAs($folder, $filename, 'public');
-        $gambarPath = str_replace('public/', 'storage/', $path);
+        $gambarPath = 'storage/' . $path;
         $urlGambar = asset($gambarPath);
 
         // Format tanggal_foto
@@ -54,7 +53,7 @@ class GaleriController extends Controller
         Galeri::create([
             'judul' => $request->judul,
             'slug' => $this->generateSlug($request->judul),
-            'kategori' => $request->kategori,
+            'kategori' => 'Galeri',
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambarPath,
             'url_gambar' => $urlGambar,
@@ -80,7 +79,6 @@ class GaleriController extends Controller
 
         $request->validate([
             'judul' => 'required|string|max:255',
-            'kategori' => 'required|in:Meat,Batu Bahisan,Liang Sipege,Balige',
             'deskripsi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'lokasi' => 'nullable|string',
@@ -97,7 +95,7 @@ class GaleriController extends Controller
         $data = [
             'judul' => $request->judul,
             'slug' => $this->generateSlug($request->judul, $galeri->id),
-            'kategori' => $request->kategori,
+            'kategori' => $galeri->kategori ?? 'Galeri',
             'deskripsi' => $request->deskripsi,
             'lokasi' => $request->lokasi,
             'tanggal_foto' => $tanggal_foto,
@@ -108,16 +106,16 @@ class GaleriController extends Controller
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama
             $oldPath = str_replace('storage/', 'public/', $galeri->gambar);
-            if (Storage::exists($oldPath)) {
-                Storage::delete($oldPath);
+            if (Storage::disk('public')->exists($oldPath)) {
+                Storage::disk('public')->delete($oldPath);
             }
 
             // Upload gambar baru
             $gambar = $request->file('gambar');
-            $folder = Galeri::getPathByKategori($request->kategori);
+            $folder = 'image/galeri';
             $filename = time() . '_' . Str::slug($request->judul) . '.' . $gambar->getClientOriginalExtension();
             $path = $gambar->storeAs($folder, $filename, 'public');
-            $data['gambar'] = str_replace('public/', 'storage/', $path);
+            $data['gambar'] = 'storage/' . $path;
             $data['url_gambar'] = asset($data['gambar']);
         }
 
@@ -148,8 +146,8 @@ class GaleriController extends Controller
         
         // Hapus file gambar
         $gambarPath = str_replace('storage/', 'public/', $galeri->gambar);
-        if (Storage::exists($gambarPath)) {
-            Storage::delete($gambarPath);
+        if (Storage::disk('public')->exists($gambarPath)) {
+            Storage::disk('public')->delete($gambarPath);
         }
         
         $galeri->delete();
