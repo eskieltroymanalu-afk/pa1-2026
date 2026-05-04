@@ -893,7 +893,7 @@
                         <img src="/image/A11.jpeg" alt="Batu Bahisan">
                     </div>
                     <div class="destinasi-content">
-                        <div class="destinasi-number">02 — GEOSITE</div>
+                        <div class="destinasi-number">03 — GEOSITE</div>
                         <h3>Sampuran</h3>
                         <div class="destinasi-location">Pulau Sibandang, Danau Toba</div>
                         <p class="destinasi-desc">Desa Sampuran merupakan salah satu desa di Kabupaten Toba, Provinsi Sumatera Utara, yang berada di kawasan dataran tinggi sekitar Danau Toba dengan kondisi alam sejuk dan wilayah berbukit. Mayoritas penduduknya bekerja sebagai petani dengan komoditas seperti padi, jagung, dan tanaman hortikultura, serta kehidupan sosial yang masih kental dengan budaya Batak, ditandai oleh gotong royong dan pelaksanaan adat dalam berbagai kegiatan masyarakat.</p>
@@ -913,7 +913,7 @@
                         <img src="/image/A11.jpeg" alt="Batu Bahisan">
                     </div>
                     <div class="destinasi-content">
-                        <div class="destinasi-number">02 — GEOSITE</div>
+                        <div class="destinasi-number">04 — GEOSITE</div>
                         <h3>Papande</h3>
                         <div class="destinasi-location">Pulau Sibandang, Danau Toba</div>
                         <p class="destinasi-desc">Desa Papande adalah sebuah desa di Kabupaten Toba, Provinsi Sumatera Utara, yang berada di kawasan sekitar Danau Toba. Desa ini memiliki lingkungan yang asri dan tenang, dengan masyarakat yang sebagian besar bekerja di bidang pertanian dan perikanan. Kehidupan sosialnya masih kental dengan budaya Batak dan nilai-nilai adat yang kuat.</p>
