@@ -466,6 +466,267 @@
         line-height: 1.6;
     }
     
+    /* ==================== 3D FEATURED SECTION ==================== */
+    .featured-section {
+        padding: 120px 0;
+        background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .featured-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(198, 164, 59, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(198, 164, 59, 0.08) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .featured-container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .featured-content {
+        perspective: 1200px;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        margin-top: 60px;
+    }
+
+    .featured-text {
+        flex: 1;
+        color: white;
+    }
+
+    .featured-text .subtitle {
+        display: inline-block;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c6a43b;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .featured-text h2 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .featured-text h2 span {
+        color: #c6a43b;
+        background: linear-gradient(135deg, #c6a43b, #e8c45a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .featured-text p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    .featured-highlights {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .highlight-item {
+        display: flex;
+        gap: 15px;
+        padding: 15px;
+        background: rgba(198, 164, 59, 0.1);
+        border-left: 3px solid #c6a43b;
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+    }
+
+    .highlight-item i {
+        font-size: 24px;
+        color: #c6a43b;
+        flex-shrink: 0;
+    }
+
+    .highlight-item h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 5px;
+    }
+
+    .highlight-item p {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+    }
+
+    .featured-cards-container {
+        flex: 1;
+        perspective: 1200px;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .featured-cards-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .featured-card {
+        position: absolute;
+        width: 280px;
+        height: 380px;
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        transform-style: preserve-3d;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        cursor: pointer;
+        transform: rotateY(0deg) rotateX(0deg) translateZ(0) scale(0.85);
+        opacity: 0.6;
+    }
+
+    .featured-card:nth-child(1) {
+        transform: rotateY(-25deg) rotateX(5deg) translateZ(-50px) scale(0.85);
+        opacity: 0.7;
+    }
+
+    .featured-card:nth-child(2) {
+        transform: rotateY(0deg) rotateX(0deg) translateZ(50px) scale(1);
+        opacity: 1;
+        z-index: 10;
+    }
+
+    .featured-card:nth-child(3) {
+        transform: rotateY(25deg) rotateX(5deg) translateZ(-50px) scale(0.85);
+        opacity: 0.7;
+    }
+
+    .featured-card:hover {
+        transform: rotateY(0deg) rotateX(-8deg) translateZ(60px) scale(1.02);
+        box-shadow: 0 30px 80px rgba(198, 164, 59, 0.3);
+    }
+
+    .featured-card:nth-child(1):hover {
+        transform: rotateY(-15deg) rotateX(3deg) translateZ(0px) scale(0.95);
+    }
+
+    .featured-card:nth-child(3):hover {
+        transform: rotateY(15deg) rotateX(3deg) translateZ(0px) scale(0.95);
+    }
+
+    .featured-card-image {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .featured-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .featured-card:hover .featured-card-image img {
+        transform: scale(1.1) rotateZ(2deg);
+    }
+
+    .featured-card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #c6a43b, #e8c45a);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        z-index: 2;
+        box-shadow: 0 8px 20px rgba(198, 164, 59, 0.4);
+    }
+
+    .featured-card-content {
+        padding: 25px;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .featured-card-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+
+    .featured-card-desc {
+        font-size: 0.75rem;
+        color: #666;
+        line-height: 1.6;
+        flex: 1;
+        margin-bottom: 12px;
+    }
+
+    .featured-card-tag {
+        display: inline-block;
+        background: linear-gradient(135deg, #c6a43b20, #c6a43b40);
+        color: #c6a43b;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        border: 1px solid #c6a43b;
+        width: fit-content;
+    }
+
+    .card-carousel-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 40px;
+    }
+
+    .carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+        background: #c6a43b;
+        border-color: #c6a43b;
+        transform: scale(1.2);
+        box-shadow: 0 0 15px rgba(198, 164, 59, 0.5);
+    }
+
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 992px) {
         .hero-content h1 {
@@ -479,6 +740,17 @@
         }
         .features-grid {
             grid-template-columns: repeat(2, 1fr);
+        }
+        .featured-content {
+            flex-direction: column;
+            gap: 40px;
+        }
+        .featured-cards-container {
+            min-height: 400px;
+        }
+        .featured-card {
+            width: 250px;
+            height: 340px;
         }
     }
     
@@ -621,6 +893,107 @@
     </div>
 </section>
 
+<!-- ==================== 3D FEATURED SECTION ==================== -->
+<section class="featured-section">
+    <div class="featured-container">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="subtitle">PILIHAN UNGGULAN</span>
+                <h2>Destinasi <span>Imperdible</span> di GeoToba</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="featured-content">
+                <div class="featured-text" data-aos="fade-right">
+                    <span class="subtitle">REKOMENDASI KAMI</span>
+                    <h2>Destinasi yang <span>Wajib Dikunjungi</span></h2>
+                    <p>Berikut adalah destinasi unggulan yang paling direkomendasikan untuk memberikan pengalaman wisata terbaik Anda di Danau Toba.</p>
+                    
+                    <div class="featured-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <h4>Top Rating</h4>
+                                <p>Rating tertinggi dari pengunjung</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Favorit</h4>
+                                <p>Paling sering dikunjungi</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-camera"></i>
+                            <div>
+                                <h4>Instagram</h4>
+                                <p>Spot foto terbaik</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-compass"></i>
+                            <div>
+                                <h4>Eksplorasi</h4>
+                                <p>Petualangan seru</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-cards-container" data-aos="fade-left">
+                    <div class="featured-cards-wrapper">
+                        <!-- Featured Card 1: Sibandang -->
+                        <div class="featured-card">
+                            <div class="featured-card-image">
+                                <img src="/image/4.jpeg" alt="Sibandang">
+                                <span class="featured-card-badge">⭐ 4.9</span>
+                            </div>
+                            <div class="featured-card-content">
+                                <h3 class="featured-card-title">Sibandang</h3>
+                                <p class="featured-card-desc">Goa alami dengan stalaktit dan stalakmit yang memukau. Destinasi caving terbaik.</p>
+                                <span class="featured-card-tag">Goa Alami</span>
+                            </div>
+                        </div>
+
+                        <!-- Featured Card 2: Muara -->
+                        <div class="featured-card">
+                            <div class="featured-card-image">
+                                <img src="/image/1.jpeg" alt="Muara">
+                                <span class="featured-card-badge">⭐ 4.8</span>
+                            </div>
+                            <div class="featured-card-content">
+                                <h3 class="featured-card-title">Muara</h3>
+                                <p class="featured-card-desc">Formasi batuan unik dengan pemandangan sunset yang spektakuler di Danau Toba.</p>
+                                <span class="featured-card-tag">Formasi Unik</span>
+                            </div>
+                        </div>
+
+                        <!-- Featured Card 3: Papande -->
+                        <div class="featured-card">
+                            <div class="featured-card-image">
+                                <img src="/image/2.jpeg" alt="Papande">
+                                <span class="featured-card-badge">⭐ 4.7</span>
+                            </div>
+                            <div class="featured-card-content">
+                                <h3 class="featured-card-title">Papande</h3>
+                                <p class="featured-card-desc">Air terjun cantik dengan suasana asri untuk petualangan keluarga yang menyenangkan.</p>
+                                <span class="featured-card-tag">Air Terjun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-carousel-nav">
+                <div class="carousel-dot active" onclick="rotateCard(0)"></div>
+                <div class="carousel-dot" onclick="rotateCard(1)"></div>
+                <div class="carousel-dot" onclick="rotateCard(2)"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ==================== STATS SECTION ==================== -->
 <section class="stats-section">
     <div class="container">
@@ -694,6 +1067,7 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
+    // Inisialisasi AOS
     AOS.init({
         duration: 800,
         once: true,
@@ -708,6 +1082,86 @@
             block: 'start'
         });
     });
+
+    // 3D Card Carousel
+    let currentIndex = 1;
+    const cards = document.querySelectorAll('.featured-card');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function rotateCard(index) {
+        currentIndex = index;
+        cards.forEach((card, i) => {
+            let offset = i - index;
+            
+            if (offset === -1) {
+                card.style.transform = 'rotateY(-25deg) rotateX(5deg) translateZ(-50px) scale(0.85)';
+                card.style.opacity = '0.7';
+                card.style.zIndex = '0';
+            } else if (offset === 0) {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(50px) scale(1)';
+                card.style.opacity = '1';
+                card.style.zIndex = '10';
+            } else if (offset === 1) {
+                card.style.transform = 'rotateY(25deg) rotateX(5deg) translateZ(-50px) scale(0.85)';
+                card.style.opacity = '0.7';
+                card.style.zIndex = '0';
+            } else {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px) scale(0.85)';
+                card.style.opacity = '0.6';
+                card.style.zIndex = '0';
+            }
+        });
+
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            if (i === index) {
+                dot.classList.add('active');
+            }
+        });
+    }
+
+    // Auto rotate cards every 5 seconds
+    let autoRotateInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        rotateCard(currentIndex);
+    }, 5000);
+
+    // Stop auto rotate on manual interaction
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            clearInterval(autoRotateInterval);
+            autoRotateInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                rotateCard(currentIndex);
+            }, 5000);
+        });
+    });
+
+    // Mouse move effect untuk card
+    const cardsContainer = document.querySelector('.featured-cards-wrapper');
+    if (cardsContainer) {
+        cardsContainer.addEventListener('mousemove', function(e) {
+            const rect = cardsContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleX = (y - centerY) * 0.05;
+            const angleY = (centerX - x) * 0.05;
+            
+            const activeCard = cardsContainer.querySelector('.featured-card[style*="scale(1)"]');
+            if (activeCard) {
+                activeCard.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(50px) scale(1)`;
+            }
+        });
+
+        cardsContainer.addEventListener('mouseleave', function() {
+            rotateCard(currentIndex);
+        });
+    }
 </script>
 
 @endsection
