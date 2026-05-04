@@ -118,6 +118,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('berita', BeritaController::class)->names('admin.berita');
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
     Route::resource('banner', BannerController::class)->names('admin.banner');
+    Route::resource('destinasi', App\Http\Controllers\Admin\DestinasiController::class)->names('admin.destinasi');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
 
     
