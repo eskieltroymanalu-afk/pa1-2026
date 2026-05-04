@@ -114,6 +114,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
     Route::resource('banner', BannerController::class)->names('admin.banner');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
+    Route::get('language/{lang}', [App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
 
     
 });

@@ -278,6 +278,15 @@
             background: white;
             transform: translateY(-3px);
         }
+
+        /* Sembunyikan toolbar Google Translate */
+        .goog-te-banner-frame,
+        .skiptranslate {
+            display: none !important;
+        }
+        body {
+            top: 0 !important;
+        }
         
         /* ==================== RESPONSIVE - LOGO STABIL ==================== */
         @media (max-width: 991px) {
@@ -375,6 +384,28 @@
     @stack('styles')
 </head>
 <body>
+    <!-- Google Translate -->
+    <div id="google_translate_element" style="display:none"></div>
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'id',
+            includedLanguages: 'en,id',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translateTo(lang) {
+        var select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event('change'));
+        }
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
         <div class="container">
@@ -420,17 +451,17 @@
                         <ul class="dropdown-menu" aria-labelledby="destinasiDropdown">
                             <li><h6 class="dropdown-header">KATEGORI DESTINASI</h6></li>
                             <li><a class="dropdown-item" href="{{ url('/destinasi/alam') }}">
-                                <i ></i> Destinasi Alam
+                                <i></i> Destinasi Alam
                             </a></li>
                             <li><a class="dropdown-item" href="{{ url('/destinasi/buatan') }}">
-                                <i ></i> Destinasi Buatan
+                                <i></i> Destinasi Buatan
                             </a></li>
                             <li><a class="dropdown-item" href="{{ url('/destinasi/budaya') }}">
-                                <i ></i> Destinasi Budaya
+                                <i></i> Destinasi Budaya
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ url('/destinasi') }}">
-                                <i ></i> Semua Destinasi
+                                <i></i> Semua Destinasi
                             </a></li>
                         </ul>
                     </li>
@@ -448,6 +479,18 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ url('/kontak') }}">
                             <i class="fas fa-envelope me-1"></i> Kontak
+                        </a>
+                    </li>
+
+                    <!-- Tombol Bahasa -->
+                    <li class="nav-item ms-2">
+                        <a onclick="translateTo('en')" class="nav-link" style="cursor:pointer">
+                            🇬🇧 English
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="translateTo('id')" class="nav-link" style="cursor:pointer">
+                            🇮🇩 Indonesia
                         </a>
                     </li>
                 </ul>
