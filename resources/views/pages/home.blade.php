@@ -848,7 +848,7 @@
                 <!-- Sibandang -->
                 <div class="destinasi-item" data-aos="fade-up">
                     <div class="destinasi-image">
-                        <img src="/image/A1.jpeg" alt="Meat">
+                        <img src="/image/A2.jpeg" alt="Meat">
                     </div>
                     <div class="destinasi-content">
                         <div class="destinasi-number">01 — GEOSITE</div>
