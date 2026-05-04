@@ -29,7 +29,7 @@ class GaleriController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg',
             'lokasi' => 'nullable|string',
             'tanggal_foto' => 'nullable|date',
             'status' => 'nullable|boolean'
@@ -80,7 +80,7 @@ class GaleriController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg',
             'lokasi' => 'nullable|string',
             'tanggal_foto' => 'nullable|date',
             'status' => 'nullable|boolean'

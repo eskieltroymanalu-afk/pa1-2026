@@ -35,7 +35,7 @@ class BannerController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif',
             'link' => 'nullable|url',
             'urutan' => 'nullable|integer|min:0',
             'status' => 'nullable|boolean',
@@ -81,7 +81,7 @@ class BannerController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'link' => 'nullable|url',
             'urutan' => 'nullable|integer|min:0',
             'status' => 'nullable|boolean',
