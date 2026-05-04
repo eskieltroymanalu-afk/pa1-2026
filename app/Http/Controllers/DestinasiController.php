@@ -11,13 +11,70 @@ class DestinasiController extends Controller
         return view('destinasi.index');
     }
 
+    public function show($id)
+    {
+        $destinasi = $this->findDestinasiById((int) $id);
+
+        return view('destinasi.detail', compact('destinasi'));
+    }
+
     // ===================== ALAM =====================
     public function alam()
     {
         $kategori = 'Alam';
         $deskripsi = 'Destinasi wisata alam yang menampilkan keindahan geologi, pegunungan, air terjun, dan keunikan alam Danau Toba.';
+        $destinasi = $this->getAlamDestinasi();
 
-        $destinasi = [
+        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
+    }
+
+    // ===================== BUATAN =====================
+    public function buatan()
+    {
+        $kategori = 'Buatan';
+        $deskripsi = 'Destinasi wisata buatan manusia di kawasan Danau Toba.';
+        $destinasi = $this->getBuatanDestinasi();
+
+        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
+    }
+
+    // ===================== BUDAYA =====================
+    public function budaya()
+    {
+        $kategori = 'Budaya';
+        $deskripsi = 'Wisata budaya Batak Toba.';
+        $destinasi = $this->getBudayaDestinasi();
+
+        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
+    }
+
+    private function findDestinasiById(int $id)
+    {
+        $allDestinasi = array_merge(
+            $this->getAlamDestinasi(),
+            $this->getBuatanDestinasi(),
+            $this->getBudayaDestinasi()
+        );
+
+        $destinasi = collect($allDestinasi)->firstWhere('id', $id);
+
+        if (! $destinasi) {
+            abort(404);
+        }
+
+        $destinasi->galeri = [
+            $destinasi->gambar,
+            $destinasi->gambar,
+            $destinasi->gambar,
+        ];
+        $destinasi->embed_maps = 'https://www.google.com/maps?q=' . urlencode($destinasi->lokasi) . '&output=embed';
+
+        return $destinasi;
+    }
+
+    private function getAlamDestinasi(): array
+    {
+        return [
             (object)[
                 'id' => 1,
                 'nama' => 'Sibandang',
@@ -55,19 +112,13 @@ class DestinasiController extends Controller
                 'maps' => 'https://maps.app.goo.gl/XvdBsMA1Y1JwTXC56'
             ]
         ];
-
-        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
     }
 
-    // ===================== BUATAN =====================
-    public function buatan()
+    private function getBuatanDestinasi(): array
     {
-        $kategori = 'Buatan';
-        $deskripsi = 'Destinasi wisata buatan manusia di kawasan Danau Toba.';
-
-        $destinasi = [
+        return [
             (object)[
-                'id' => 1,
+                'id' => 5,
                 'nama' => 'Patung Yesus Memberkati',
                 'lokasi' => 'Balige, Danau Toba',
                 'deskripsi' => 'Patung Yesus 30 meter dengan view Danau Toba.',
@@ -76,7 +127,7 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Patung+Yesus+Memberkati+Balige'
             ],
             (object)[
-                'id' => 2,
+                'id' => 6,
                 'nama' => 'Taman Lingga',
                 'lokasi' => 'Balige, Danau Toba',
                 'deskripsi' => 'Taman kota dengan view Danau Toba.',
@@ -85,7 +136,7 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Taman+Lingga+Balige'
             ],
             (object)[
-                'id' => 3,
+                'id' => 7,
                 'nama' => 'Jembatan Toba',
                 'lokasi' => 'Balige, Danau Toba',
                 'deskripsi' => 'Jembatan ikonik dengan panorama Danau Toba.',
@@ -94,19 +145,13 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Jembatan+Toba+Balige'
             ]
         ];
-
-        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
     }
 
-    // ===================== BUDAYA =====================
-    public function budaya()
+    private function getBudayaDestinasi(): array
     {
-        $kategori = 'Budaya';
-        $deskripsi = 'Wisata budaya Batak Toba.';
-
-        $destinasi = [
+        return [
             (object)[
-                'id' => 1,
+                'id' => 8,
                 'nama' => 'Meat Village',
                 'lokasi' => 'Pulau Sibandang, Danau Toba',
                 'deskripsi' => 'Desa adat Batak dengan sejarah dan budaya.',
@@ -115,7 +160,7 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Meat+Village+Sibandang'
             ],
             (object)[
-                'id' => 2,
+                'id' => 9,
                 'nama' => 'Museum Batak',
                 'lokasi' => 'Balige, Danau Toba',
                 'deskripsi' => 'Museum sejarah Batak Toba.',
@@ -124,7 +169,7 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Museum+Batak+Balige'
             ],
             (object)[
-                'id' => 3,
+                'id' => 10,
                 'nama' => 'Desa Ulos Hutaraja',
                 'lokasi' => 'Balige, Danau Toba',
                 'deskripsi' => 'Pusat tenun ulos khas Batak.',
@@ -133,7 +178,5 @@ class DestinasiController extends Controller
                 'maps' => 'https://www.google.com/maps/search/?api=1&query=Hutaraja+Balige'
             ]
         ];
-
-        return view('destinasi.kategori', compact('kategori', 'deskripsi', 'destinasi'));
     }
 }
