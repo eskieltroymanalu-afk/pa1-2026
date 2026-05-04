@@ -380,9 +380,9 @@
         <div class="container">
             <!-- LOGO SECTION - RAPI -->
             <div class="logo-wrapper">
-                <img src="{{ asset('image/logobankindonesia.jpeg') }}" alt="Bank Indonesia" class="logo-img">
+                <img src="{{ asset('uploads/logobankindonesia.jpeg') }}" alt="Bank Indonesia" class="logo-img">
                 <div class="logo-divider"></div>
-                <img src="{{ asset('image/del.jpeg') }}" alt="Logo Del" class="logo-img">
+                <img src="{{ asset('uploads/del.jpeg') }}" alt="Logo Del" class="logo-img">
                 <div class="logo-divider"></div>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Geo<span>Toba</span>
