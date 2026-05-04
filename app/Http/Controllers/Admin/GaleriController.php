@@ -140,6 +140,16 @@ class GaleriController extends Controller
         return $slug;
     }
 
+    public function toggleStatus($id)
+    {
+        $galeri = Galeri::findOrFail($id);
+        $galeri->status = !$galeri->status;
+        $galeri->save();
+
+        return redirect()->route('admin.galeri.index')
+            ->with('success', 'Status galeri berhasil diperbarui');
+    }
+
     public function destroy($id)
     {
         $galeri = Galeri::findOrFail($id);

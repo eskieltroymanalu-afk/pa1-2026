@@ -27,9 +27,6 @@ Route::get('/informasi', function () {
     return view('pages.informasi', compact('informasi'));
 })->name('informasi');
 
-// Destinasi
-Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
-
 // Detail Destinasi (jika masih pakai ID)
 Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
 
@@ -55,12 +52,6 @@ Route::get('/galeri', function () {
     $galeri = App\Models\Galeri::where('status', true)->latest()->paginate(12);
     return view('pages.galeri', compact('galeri'));
 })->name('galeri');
-
-
-
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::resource('galeri', GaleriController::class);
-});
 
 // Berita
 Route::get('/berita', function () {
@@ -118,7 +109,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('berita', BeritaController::class)->names('admin.berita');
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
     Route::resource('banner', BannerController::class)->names('admin.banner');
+    Route::resource('destinasi', App\Http\Controllers\Admin\DestinasiController::class)->names('admin.destinasi');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
+    Route::get('language/{lang}', [App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
 
     
 });

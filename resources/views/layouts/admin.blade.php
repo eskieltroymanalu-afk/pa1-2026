@@ -343,6 +343,9 @@
             <a href="{{ route('admin.banner.index') }}" class="{{ request()->routeIs('admin.banner.*') ? 'active' : '' }}">
                 <i class="fas fa-image"></i> Banner
             </a>
+            <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
+                <i class="fas fa-map-marker-alt"></i> Destinasi
+            </a>
         </div>
     </div>
     
