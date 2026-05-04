@@ -27,9 +27,6 @@ Route::get('/informasi', function () {
     return view('pages.informasi', compact('informasi'));
 })->name('informasi');
 
-// Destinasi
-Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
-
 // Detail Destinasi (jika masih pakai ID)
 Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
 
@@ -55,12 +52,6 @@ Route::get('/galeri', function () {
     $galeri = App\Models\Galeri::where('status', true)->latest()->paginate(12);
     return view('pages.galeri', compact('galeri'));
 })->name('galeri');
-
-
-
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::resource('galeri', GaleriController::class);
-});
 
 // Berita
 Route::get('/berita', function () {
