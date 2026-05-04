@@ -15,7 +15,10 @@
                         <h4 class="mb-0">Login Admin</h4>
                     </div>
                     <div class="card-body">
-                        @if($errors->any())
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                        @if ($errors->any())
                             <div class="alert alert-danger">{{ $errors->first() }}</div>
                         @endif
                         <form method="POST" action="{{ route('login') }}">
@@ -30,6 +33,9 @@
                             </div>
                             <button type="submit" class="btn btn-dark w-100">Login</button>
                         </form>
+                        <div class="text-center mt-3">
+                            <a href="{{ route('password.request') }}">Lupa Password?</a>
+                        </div>
                     </div>
                 </div>
             </div>
