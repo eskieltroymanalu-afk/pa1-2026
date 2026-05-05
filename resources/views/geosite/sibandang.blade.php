@@ -945,7 +945,7 @@
 <!-- CTA -->
 <section class="cta">
     <div class="container">
-        <h3>Kunjungi Meat Sekarang</h3>
+        <h3>Kunjungi Sibandang Sekarang</h3>
         <div class="divider"></div>
         <p>Rasakan pengalaman wisata budaya Batak yang autentik</p>
         <a href="{{ url('/') }}" class="cta-btn">Kembali ke Beranda</a>
