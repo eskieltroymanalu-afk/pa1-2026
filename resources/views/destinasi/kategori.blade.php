@@ -373,6 +373,11 @@
                 <p>Destinasi pada kategori ini akan segera ditambahkan.</p>
             </div>
             @endforelse
+            <div class="empty-state" id="searchEmptyState" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>Tidak ada destinasi yang cocok</h3>
+                <p>Coba kata kunci lain atau hapus filter pencarian untuk melihat semua destinasi.</p>
+            </div>
         </div>
     </div>
 </section>
