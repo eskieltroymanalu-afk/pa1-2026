@@ -457,7 +457,6 @@
         window.addEventListener('scroll', function() {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
-        
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', function() {
             backToTop.classList.toggle('show', window.scrollY > 300);

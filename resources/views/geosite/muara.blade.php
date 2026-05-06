@@ -141,7 +141,7 @@
             cursor: pointer;
             color: #555;
         }
-        .mobile-link {
+        .mobile-link { 
             display: block;
             font-size: 0.85rem;
             letter-spacing: 0.15em;
