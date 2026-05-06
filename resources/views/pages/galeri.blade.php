@@ -128,13 +128,28 @@ body {
     max-width: 90vw;
     max-height: 80vh;
     border-radius: 12px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+}
+
+.lightbox img.fade-out {
+    opacity: 0;
+    transform: scale(0.96);
 }
 
 /* description */
 .lightbox-desc {
-    margin-top: 10px;
+    margin-top: 15px;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    background: rgba(0,0,0,0.72);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
 /* close */
@@ -156,7 +171,16 @@ body {
     color: white;
     cursor: pointer;
     user-select: none;
-    padding: 10px;
+    padding: 14px 18px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-50%) scale(1.08);
 }
 
 .nav.left { left: 20px; }
@@ -205,13 +229,18 @@ body {
     </div>
 </section>
 
+<audio id="bgMusic" loop preload="auto">
+    <source src="{{ asset('audio/GONDANG HASAPI BERTUA SITANGGANG SULIM TONGOSAN.mp4') }}" type="audio/mp4">
+    Your browser does not support the audio element.
+</audio>
+
 <!-- ===================== LIGHTBOX ===================== -->
 <div class="lightbox" id="lightbox" onclick="outsideClick(event)">
     
     <span class="close" onclick="closeLightbox()">&times;</span>
 
-    <span class="nav left" onclick="prevImage(event)">&#10094;</span>
-    <span class="nav right" onclick="nextImage(event)">&#10095;</span>
+    <span class="nav left" onclick="prevImage(event)" aria-label="Previous image">&#10094;</span>
+    <span class="nav right" onclick="nextImage(event)" aria-label="Next image">&#10095;</span>
 
     <div class="lightbox-content">
         <img id="lightbox-img">
@@ -220,47 +249,60 @@ body {
 
 </div>
 
-<!-- BACKGROUND MUSIC (YOUTUBE FIX) -->
-<iframe
-    id="bg-music"
-    width="0"
-    height="0"
-    src="https://www.youtube.com/embed/n2tHazyShic?autoplay=1&mute=1&loop=1&playlist=n2tHazyShic&controls=0"
-    frameborder="0"
-    allow="autoplay"
-    style="display:none;">
-</iframe>
-
 <!-- ===================== SCRIPT ===================== -->
 <script>
 const images = @json($galeri->map(function($item) {
     return [
         'src' => asset($item->gambar),
-        'desc' => $item->judul ?: ($item->deskripsi ?? 'Galeri Foto'),
+        'desc' => $item->judul ? $item->judul . ($item->deskripsi ? ' - ' . $item->deskripsi : '') : ($item->deskripsi ?? 'Galeri Foto'),
     ];
 }));
 
-window.addEventListener("load", function () {
-    const frame = document.getElementById("bg-music");
+const bgMusic = document.getElementById('bgMusic');
+let currentIndex = 0;
+let isTransitioning = false;
 
-    // paksa reload supaya autoplay dipicu
-    frame.src = frame.src;
+function tryPlayMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+        bgMusic.volume = 0.35;
+        bgMusic.play().catch(() => {
+            // browser menolak autoplay, tetap tenang
+        });
+    }
+}
 
-    // fallback kalau diblok browser
-    document.body.addEventListener("click", () => {
-        frame.src = frame.src;
-    }, { once: true });
-});
+document.body.addEventListener('click', function() {
+    tryPlayMusic();
+}, { once: true });
 
 function openLightbox(index){
     currentIndex = index;
-    updateLightbox();
+    updateLightbox(true);
     document.getElementById('lightbox').classList.add('show');
+    tryPlayMusic();
 }
 
-function updateLightbox(){
-    document.getElementById('lightbox-img').src = images[currentIndex].src;
-    document.getElementById('lightbox-desc').innerText = images[currentIndex].desc;
+function updateLightbox(isOpen = false){
+    const img = document.getElementById('lightbox-img');
+    const desc = document.getElementById('lightbox-desc');
+    const nextSrc = images[currentIndex].src;
+    const nextDesc = images[currentIndex].desc;
+
+    if (!isOpen) {
+        isTransitioning = true;
+        img.classList.add('fade-out');
+        setTimeout(() => {
+            img.src = nextSrc;
+            desc.innerText = nextDesc;
+            img.classList.remove('fade-out');
+            isTransitioning = false;
+        }, 220);
+    } else {
+        img.src = nextSrc;
+        desc.innerText = nextDesc;
+        isTransitioning = false;
+    }
 }
 
 function closeLightbox(){
@@ -269,13 +311,15 @@ function closeLightbox(){
 
 /* next prev */
 function nextImage(e){
-    e.stopPropagation();
+    if (e) e.stopPropagation();
+    if (isTransitioning) return;
     currentIndex = (currentIndex + 1) % images.length;
     updateLightbox();
 }
 
 function prevImage(e){
-    e.stopPropagation();
+    if (e) e.stopPropagation();
+    if (isTransitioning) return;
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateLightbox();
 }
@@ -300,6 +344,12 @@ document.getElementById('lightbox').addEventListener('touchend', e => {
     } else if(endX - startX > 50){
         prevImage(e);
     }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('show')) return;
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
 });
 </script>
 
