@@ -806,27 +806,36 @@
                 <img src="{{ asset('uploads/A3.JPG') }}" class="card-img">
                 <div class="card-content">
                     <h3>Homestay Putih</h3>
-                    <p>Menginap di rumah adat Batak.</p>
-                    <div class="card-price">💰 [HARGA1] / malam</div>
-                    <div class="card-contact">📞 [KONTAK_HOMESTAY]</div>
+                    <p>Menginap di rumah dengan wisata alam.</p>
+                    <div class="card-price">💰 Rp. 250.000/ malam</div>
+                    <div class="card-contact">📞 +62 813-7682-1631</div>
                 </div>
             </div>
             <div class="card">
                 <img src="{{ asset('uploads/A4.JPG') }}" class="card-img">
                 <div class="card-content">
                     <h3>Homestay Desa Sampuran</h3>
-                    <p>Pemandangan langsung Danau Toba.</p>
-                    <div class="card-price">💰 [HARGA2] / malam</div>
-                    <div class="card-contact">📞 [KONTAK_LAKEVIEW]</div>
+                    <p>Homestay Rumah Putih Pulau Sibandang adalah sebuah penginapan yang terletak di Pulau Sibandang. Dengan nuansa yang ramah dan pemandangan alam yang memukau, Homestay Rumah Putih menawarkan pengalaman menginap yang menyenangkan bagi wisatawan yang ingin menjelajahi keindahan Pulau Sibandang</p>
+                    <div class="card-price">💰 Rp. 250.000/ malam</div>
+                    <div class="card-contact">📞 +62 813-7682-1631</div>
                 </div>
             </div>
             <div class="card">
                 <img src="{{ asset('uploads/A5.JPG') }}" class="card-img">
                 <div class="card-content">
-                    <h3>Meat Traditional Lodge</h3>
-                    <p>Tradisional dengan fasilitas modern.</p>
-                    <div class="card-price">💰 [HARGA3] / malam</div>
-                    <div class="card-contact">📞 [KONTAK_LODGE]</div>
+                    <h3>Homestay Erly</h3>
+                    <p>Penginapan ramah keluarga dengan pemandangan alam yang menakjubkan</p>
+                    <div class="card-price">💰 Rp. 250.000 / malam</div>
+                    <div class="card-contact">📞 +62 813-7682-1631</div>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{{ asset('uploads/A5.JPG') }}" class="card-img">
+                <div class="card-content">
+                    <h3>Homestay Pak Theresia</h3>
+                    <p>Akomodasi yang hangat dan menyenangkan di tengah pulau</p>
+                    <div class="card-price">💰 Rp. 250.000 / malam</div>
+                    <div class="card-contact">📞 +62 813-7682-1631</div>
                 </div>
             </div>
         </div>
@@ -897,13 +906,8 @@
 <section id="galeri" class="section">
     <div class="container">
         <div class="section-title">
-            <h2>Galeri Pantai</h2>
+            <h2>Galeri</h2>
             <div class="divider"></div>
-        </div>
-        <div class="galeri-tabs">
-            <button class="tab-btn active" data-tab="pantai1">Pantai 1</button>
-            <button class="tab-btn" data-tab="pantai2">Pantai 2</button>
-            <button class="tab-btn" data-tab="pantai3">Pantai 3</button>
         </div>
         <div class="galeri-grid" id="galeriGrid">
             <div class="galeri-item pantai1"><img src="{{ asset('uploads/A1.jpeg') }}"></div>
