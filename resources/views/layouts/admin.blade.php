@@ -33,7 +33,7 @@
             color: #94a3b8;
             transition: transform 0.3s ease;
             z-index: 1000;
-            transform: translateX(-100%);
+            transform: translateX(-90%);
         }
         
         .sidebar.open {
