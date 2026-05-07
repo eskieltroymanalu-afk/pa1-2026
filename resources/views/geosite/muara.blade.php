@@ -798,7 +798,7 @@
 <section id="penginapan" class="section">
     <div class="container">
         <div class="section-title">
-            <h2>Penginapan</h2>
+            <h2>Homestay</h2>
             <div class="divider"></div>
         </div>
         <div class="grid-3">
