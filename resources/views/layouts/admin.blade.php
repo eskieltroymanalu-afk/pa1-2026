@@ -18,7 +18,8 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
+            background: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+            min-height: 100vh;
         }
         
         /* Sidebar */
@@ -32,7 +33,7 @@
             color: #94a3b8;
             transition: transform 0.3s ease;
             z-index: 1000;
-            transform: translateX(-100%);
+            transform: translateX(-90%);
         }
         
         .sidebar.open {
@@ -100,19 +101,22 @@
         
         /* Main Content */
         .main-content {
-            padding: 15px;
+            padding: 18px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
         }
         
         /* Top Bar */
         .top-bar {
-            background: white;
-            border-radius: 12px;
-            padding: 12px 15px;
+            background: linear-gradient(135deg, #2563eb, #0f172a);
+            border-radius: 14px;
+            padding: 14px 18px;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+            color: #f8fafc;
         }
         
         .menu-btn {
@@ -125,15 +129,16 @@
         }
         
         .page-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin: 0;
+            color: #f8fafc;
         }
         
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .user-name {
@@ -144,10 +149,32 @@
         .logout-btn {
             background: #ef4444;
             border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: 10px;
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 5px 14px rgba(239, 68, 68, 0.25);
+        }
+        
+        .alert-custom {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            color: #334155;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+        }
+        
+        .alert-custom.success {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+        
+        .alert-custom.error {
+            border-color: #ef4444;
+            background: #fef2f2;
         }
         
         /* Cards */
@@ -316,6 +343,9 @@
             <a href="{{ route('admin.banner.index') }}" class="{{ request()->routeIs('admin.banner.*') ? 'active' : '' }}">
                 <i class="fas fa-image"></i> Banner
             </a>
+            <a href="{{ route('admin.destinasi.index') }}" class="{{ request()->routeIs('admin.destinasi.*') ? 'active' : '' }}">
+                <i class="fas fa-map-marker-alt"></i> Destinasi
+            </a>
         </div>
     </div>
     
@@ -334,6 +364,16 @@
                 </form>
             </div>
         </div>
+
+        @if(session('success'))
+            <div class="alert-custom success">{{ session('success') }}</div>
+        @endif
+        @if(session('status'))
+            <div class="alert-custom success">{{ session('status') }}</div>
+        @endif
+        @if($errors->any())
+            <div class="alert-custom error">{{ $errors->first() }}</div>
+        @endif
         
         @yield('content')
     </div>

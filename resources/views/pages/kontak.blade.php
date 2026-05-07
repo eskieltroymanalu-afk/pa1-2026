@@ -484,7 +484,7 @@
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="map-card">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0!2d99.0835095!3d2.3339262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e0415b8f7da39%3A0xc6beb74287f355a5!2sBalige%2C%20Toba%20Samosir%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                        src="https://www.google.com/maps?q=Muara,Tapanuli+Utara&output=embed"
                         allowfullscreen="" 
                         loading="lazy">
                     </iframe>

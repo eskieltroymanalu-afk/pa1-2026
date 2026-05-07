@@ -18,16 +18,23 @@
     <div class="table-responsive">
         <table class="table table-custom">
             <thead>
-                <tr><th>#</th><th>Judul</th><th>Kategori</th><th>Penulis</th><th>Status</th><th>Aksi</th></tr>
+                <tr><th>#</th><th>Gambar</th><th>Judul</th><th>Kategori</th><th>Penulis</th><th>Status</th><th>Aksi</th></tr>
             </thead>
             <tbody>
                 @forelse($informasi as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>
+                        @if($item->gambar)
+                            <img src="{{ asset($item->gambar) }}" class="preview-img" alt="Gambar Informasi">
+                        @else
+                            -
+                        @endif
+                    </td>
                     <td><strong>{{ Str::limit($item->judul, 40) }}</strong></td>
                     <td><span class="badge-info badge">{{ $item->kategori }}</span></td>
-                    <td>{{ $item->penulis }}</span></td>
-                    <td>@if($item->status)<span class="badge-success badge">Aktif</span>@else<span class="badge-danger badge">Tidak</span>@endif</span></td>
+                    <td>{{ $item->penulis }}</td>
+                    <td>@if($item->status)<span class="badge-success badge">Aktif</span>@else<span class="badge-danger badge">Tidak</span>@endif</td>
                     <td>
                         <div class="d-flex gap-1">
                             <a href="{{ route('admin.informasi.edit', $item->id) }}" class="btn btn-outline-custom"><i class="fas fa-edit"></i></a>
@@ -41,7 +48,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="6" class="text-center py-4">Belum ada data informasi</td></td>
+                <tr><td colspan="7" class="text-center py-4">Belum ada data informasi</td></tr>
                 @endforelse
             </tbody>
         </table>

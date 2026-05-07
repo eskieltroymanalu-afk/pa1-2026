@@ -41,16 +41,7 @@ class GaleriSeeder extends Seeder
                 'status' => true,
                 'views' => 0
             ],
-            [
-                'judul' => 'Liang Sipege',
-                'slug' => 'liang-sipege',
-                'deskripsi' => 'Goa alami dengan stalaktit dan stalakmit yang indah',
-                'gambar' => '/image/liang.jpg',
-                'kategori' => 'Liang Sipege',
-                'lokasi' => 'Samosir',
-                'status' => true,
-                'views' => 0
-            ],
+           
         ];
 
         foreach ($galeri as $item) {

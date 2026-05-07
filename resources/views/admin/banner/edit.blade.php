@@ -56,6 +56,9 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <small class="form-text text-muted">Format: JPG, PNG, GIF. Maksimal 2MB</small>
+                                    <div class="mt-3">
+                                        <img id="bannerPreview" src="#" alt="Preview Gambar Baru" class="img-fluid rounded d-none" style="max-width: 100%; max-height: 300px;" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -88,4 +91,16 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('gambar').addEventListener('change', function (e) {
+        const preview = document.getElementById('bannerPreview');
+        const file = e.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('d-none');
+        } else {
+            preview.classList.add('d-none');
+        }
+    });
+</script>
 @endsection

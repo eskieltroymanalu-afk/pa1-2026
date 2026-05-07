@@ -829,7 +829,7 @@
 </section>
                 </div>
                 <div class="about-image" data-aos="fade-left">
-                    <img src="/image/B3.jpeg" alt="Danau Toba">
+                    <img src="{{ asset('uploads/A1.JPEG') }}" alt="Danau Toba">
                 </div>
             </div>
         </div>
@@ -848,7 +848,7 @@
                 <!-- Sibandang -->
                 <div class="destinasi-item" data-aos="fade-up">
                     <div class="destinasi-image">
-                        <img src="/image/A1.jpeg" alt="Meat">
+                        <img src="{{ asset('uploads/A2.JPG') }}" alt="Sibandang">
                     </div>
                     <div class="destinasi-content">
                         <div class="destinasi-number">01 — GEOSITE</div>
@@ -868,7 +868,7 @@
                 <!-- Muara-->
                 <div class="destinasi-item" data-aos="fade-up">
                     <div class="destinasi-image">
-                        <img src="/image/meat/liang-detail.jpg" alt="Liang Sipege">
+                        <img src="{{ asset('uploads/A3.JPG') }}" alt="Muara">
                     </div>
                     <div class="destinasi-content">
                         <div class="destinasi-number">02 — GEOSITE</div>
@@ -890,10 +890,10 @@
                 <!-- Sampuran -->
                 <div class="destinasi-item reverse" data-aos="fade-up">
                     <div class="destinasi-image">
-                        <img src="/image/A11.jpeg" alt="Batu Bahisan">
+                        <img src="{{ asset('uploads/A4.JPG') }}" alt="Sampuran">
                     </div>
                     <div class="destinasi-content">
-                        <div class="destinasi-number">02 — GEOSITE</div>
+                        <div class="destinasi-number">03 — GEOSITE</div>
                         <h3>Sampuran</h3>
                         <div class="destinasi-location">Pulau Sibandang, Danau Toba</div>
                         <p class="destinasi-desc">Desa Sampuran merupakan salah satu desa di Kabupaten Toba, Provinsi Sumatera Utara, yang berada di kawasan dataran tinggi sekitar Danau Toba dengan kondisi alam sejuk dan wilayah berbukit. Mayoritas penduduknya bekerja sebagai petani dengan komoditas seperti padi, jagung, dan tanaman hortikultura, serta kehidupan sosial yang masih kental dengan budaya Batak, ditandai oleh gotong royong dan pelaksanaan adat dalam berbagai kegiatan masyarakat.</p>
@@ -910,10 +910,10 @@
                 <!-- Papande-->
                 <div class="destinasi-item reverse" data-aos="fade-up">
                     <div class="destinasi-image">
-                        <img src="/image/A11.jpeg" alt="Batu Bahisan">
+                        <img src="{{ asset('uploads/A5.JPG') }}" alt="Papande">
                     </div>
                     <div class="destinasi-content">
-                        <div class="destinasi-number">02 — GEOSITE</div>
+                        <div class="destinasi-number">04 — GEOSITE</div>
                         <h3>Papande</h3>
                         <div class="destinasi-location">Pulau Sibandang, Danau Toba</div>
                         <p class="destinasi-desc">Desa Papande adalah sebuah desa di Kabupaten Toba, Provinsi Sumatera Utara, yang berada di kawasan sekitar Danau Toba. Desa ini memiliki lingkungan yang asri dan tenang, dengan masyarakat yang sebagian besar bekerja di bidang pertanian dan perikanan. Kehidupan sosialnya masih kental dengan budaya Batak dan nilai-nilai adat yang kuat.</p>
@@ -942,19 +942,19 @@
     <div class="gallery-grid">
 
         <div class="gallery-item" onclick="openGallery(this)">
-            <img src="/image/21.jpeg" alt="Galeri 1">
+            <img src="{{ asset('uploads/A1.jpeg') }}" alt="Galeri 1">
         </div>
 
         <div class="gallery-item" onclick="openGallery(this)">
-            <img src="/image/DSC_0150.jpg" alt="Galeri 2">
+            <img src="{{ asset('uploads/A2.JPG') }}" alt="Galeri 2">
         </div>
 
         <div class="gallery-item" onclick="openGallery(this)">
-            <img src="/image/syalom.jpeg" alt="Galeri 3">
+            <img src="{{ asset('uploads/A3.JPG') }}" alt="Galeri 3">
         </div>
 
         <div class="gallery-item" onclick="openGallery(this)">
-            <img src="/image/A7.jpeg" alt="Galeri 4">
+            <img src="{{ asset('uploads/A4.JPG') }}" alt="Galeri 4">
         </div>
 
     </div>

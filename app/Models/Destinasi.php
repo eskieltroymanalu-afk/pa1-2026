@@ -13,7 +13,14 @@ class Destinasi extends Model
         'nama',
         'slug',
         'gambar',
-        'deskripsi'
+        'deskripsi',
+        'lokasi',
+        'kategori',
+        'tags',
+        'maps',
+        'status',
+        'views',
+        'url_gambar'
     ];
 
     public function getRouteKeyName()

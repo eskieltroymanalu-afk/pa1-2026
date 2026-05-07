@@ -466,6 +466,354 @@
         line-height: 1.6;
     }
     
+    /* ==================== SEARCH & FILTER SECTION ==================== */
+    .search-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        position: relative;
+    }
+
+    .search-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .search-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .search-header .subtitle {
+        display: inline-block;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c6a43b;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .search-header h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1a1a1a;
+    }
+
+    .search-header .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #c6a43b, #e8c45a);
+        margin: 0 auto 20px;
+        border-radius: 3px;
+    }
+
+    .search-header p {
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .search-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 40px;
+        align-items: center;
+    }
+
+    .search-input-wrapper {
+        position: relative;
+        flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 50px;
+        font-size: 1rem;
+        background: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #c6a43b;
+        box-shadow: 0 4px 20px rgba(198, 164, 59, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #c6a43b;
+        font-size: 1.2rem;
+    }
+
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 10px 20px;
+        border: 2px solid #e0e0e0;
+        background: white;
+        color: #666;
+        border-radius: 25px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+        border-color: #c6a43b;
+        background: #c6a43b;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(198, 164, 59, 0.3);
+    }
+
+    .results-section {
+        margin-top: 40px;
+    }
+
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .results-count {
+        font-size: 0.9rem;
+        color: #666;
+        font-weight: 600;
+    }
+
+    .results-count span {
+        color: #c6a43b;
+        font-weight: 700;
+    }
+
+    .sort-select {
+        padding: 8px 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: white;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .sort-select:focus {
+        outline: none;
+        border-color: #c6a43b;
+        box-shadow: 0 0 0 2px rgba(198, 164, 59, 0.1);
+    }
+
+    .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    .result-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .result-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .result-card-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .result-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .result-card:hover .result-card-image img {
+        transform: scale(1.1);
+    }
+
+    .result-card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        background: rgba(198, 164, 59, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .result-card-content {
+        padding: 20px;
+    }
+
+    .result-card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .result-card-category {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        background: #f0f0f0;
+        color: #666;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .result-card-location {
+        font-size: 0.8rem;
+        color: #c6a43b;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .result-card-desc {
+        font-size: 0.85rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .result-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 15px;
+    }
+
+    .result-card-tag {
+        font-size: 0.65rem;
+        padding: 4px 8px;
+        background: #f8f9fa;
+        color: #666;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+    .result-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .result-card-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.8rem;
+        color: #c6a43b;
+        font-weight: 600;
+    }
+
+    .result-card-btn {
+        padding: 8px 16px;
+        background: transparent;
+        border: 1px solid #c6a43b;
+        color: #c6a43b;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .result-card-btn:hover {
+        background: #c6a43b;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666;
+    }
+
+    .no-results i {
+        font-size: 4rem;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    .no-results h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .no-results p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .no-results .search-btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background: #c6a43b;
+        color: white;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .no-results .search-btn:hover {
+        background: #b8953a;
+        transform: translateY(-2px);
+    }
+
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 992px) {
         .hero-content h1 {
@@ -479,6 +827,21 @@
         }
         .features-grid {
             grid-template-columns: repeat(2, 1fr);
+        }
+        .search-filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .search-input-wrapper {
+            min-width: auto;
+            max-width: none;
+        }
+        .filter-buttons {
+            justify-content: center;
+        }
+        .results-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
     }
     
@@ -519,10 +882,49 @@
         <p data-aos="fade-up" data-aos-delay="200">Jelajahi keindahan geologi, budaya, dan pesona alam Caldera Danau Toba yang diakui UNESCO</p>
     </div>
     <div class="hero-scroll">
-        <a href="#categories">
-            <span>SCROLL</span>
+        <a href="#search">
+            <span>CARI DESTINASI</span>
             <div class="line"></div>
         </a>
+    </div>
+</section>
+
+<!-- ==================== SEARCH & FILTER SECTION ==================== -->
+<section class="search-section" id="search">
+    <div class="search-container">
+        <div class="search-header" data-aos="fade-up">
+            <span class="subtitle">CARI DESTINASI</span>
+            <h2>Temukan Destinasi Impianmu</h2>
+            <div class="divider"></div>
+            <p>Cari destinasi wisata GeoToba berdasarkan nama, lokasi, atau kategori favoritmu</p>
+        </div>
+
+        <div class="search-filters" data-aos="fade-up" data-aos-delay="100">
+            <div class="search-input-wrapper">
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari destinasi, lokasi, atau aktivitas...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="alam">Alam</button>
+                <button class="filter-btn" data-filter="buatan">Buatan</button>
+                <button class="filter-btn" data-filter="budaya">Budaya</button>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="results-header">
+                <div class="results-count">Menampilkan <span id="resultsCount">0</span> destinasi</div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="name">Urutkan: Nama A-Z</option>
+                    <option value="name-desc">Urutkan: Nama Z-A</option>
+                    <option value="location">Urutkan: Lokasi</option>
+                </select>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
     </div>
 </section>
 
@@ -694,12 +1096,13 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
+    // Inisialisasi AOS
     AOS.init({
         duration: 800,
         once: true,
         offset: 50
     });
-    
+
     // Smooth scroll
     document.querySelector('.hero-scroll a').addEventListener('click', function(e) {
         e.preventDefault();
@@ -707,6 +1110,212 @@
             behavior: 'smooth',
             block: 'start'
         });
+    });
+
+    // ==================== SEARCH & FILTER FUNCTIONALITY ====================
+    // Data destinasi dari database
+    const destinasiData = @json($destinasi->map(function($item) {
+        $tags = $item->tags;
+        if (is_string($tags)) {
+            $tags = json_decode($tags, true) ?? [];
+        } elseif (is_null($tags)) {
+            $tags = [];
+        }
+        return [
+            'id' => $item->id,
+            'nama' => $item->nama,
+            'kategori' => strtolower($item->kategori),
+            'lokasi' => $item->lokasi,
+            'deskripsi' => $item->deskripsi,
+            'gambar' => $item->gambar,
+            'tags' => $tags,
+            'maps' => $item->maps,
+            'rating' => 4.5 // Default rating since not in DB
+        ];
+    }));
+
+    // DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const resultsCount = document.getElementById('resultsCount');
+    const sortSelect = document.getElementById('sortSelect');
+
+    // Current state
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentSort = 'name';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        renderResults();
+        setupEventListeners();
+    });
+
+    // Setup event listeners
+    function setupEventListeners() {
+        // Search input
+        searchInput.addEventListener('input', function(e) {
+            currentSearch = e.target.value.toLowerCase();
+            renderResults();
+        });
+
+        // Filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Update current filter
+                currentFilter = this.dataset.filter;
+                renderResults();
+            });
+        });
+
+        // Sort select
+        sortSelect.addEventListener('change', function(e) {
+            currentSort = e.target.value;
+            renderResults();
+        });
+    }
+
+    // Filter and search function
+    function filterDestinasi() {
+        return destinasiData.filter(destinasi => {
+            // Filter by category
+            const categoryMatch = currentFilter === 'all' || destinasi.kategori === currentFilter;
+
+            // Filter by search
+            const searchMatch = currentSearch === '' ||
+                destinasi.nama.toLowerCase().includes(currentSearch) ||
+                destinasi.lokasi.toLowerCase().includes(currentSearch) ||
+                destinasi.deskripsi.toLowerCase().includes(currentSearch) ||
+                destinasi.tags.some(tag => tag.toLowerCase().includes(currentSearch));
+
+            return categoryMatch && searchMatch;
+        });
+    }
+
+    // Sort function
+    function sortDestinasi(destinasi) {
+        return destinasi.sort((a, b) => {
+            switch(currentSort) {
+                case 'name':
+                    return a.nama.localeCompare(b.nama);
+                case 'name-desc':
+                    return b.nama.localeCompare(a.nama);
+                case 'location':
+                    return a.lokasi.localeCompare(b.lokasi);
+                default:
+                    return 0;
+            }
+        });
+    }
+
+    // Render results
+    function renderResults() {
+        const filtered = filterDestinasi();
+        const sorted = sortDestinasi(filtered);
+
+        // Update count
+        resultsCount.textContent = sorted.length;
+
+        // Clear previous results
+        resultsGrid.innerHTML = '';
+
+        if (sorted.length === 0) {
+            // No results
+            resultsGrid.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>Tidak ada destinasi ditemukan</h3>
+                    <p>Coba ubah kata kunci pencarian atau filter kategori</p>
+                    <a href="#search" class="search-btn" onclick="resetSearch()">Reset Pencarian</a>
+                </div>
+            `;
+            return;
+        }
+
+        // Render results
+        sorted.forEach((destinasi, index) => {
+            const card = createDestinasiCard(destinasi, index);
+            resultsGrid.appendChild(card);
+        });
+    }
+
+    // Create destinasi card
+    function createDestinasiCard(destinasi, index) {
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.style.animationDelay = `${index * 0.1}s`;
+
+        const kategoriLabels = {
+            'alam': 'Alam',
+            'buatan': 'Buatan',
+            'budaya': 'Budaya'
+        };
+
+        const kategoriColors = {
+            'alam': '#4CAF50',
+            'buatan': '#2196F3',
+            'budaya': '#FF9800'
+        };
+
+        card.innerHTML = `
+            <div class="result-card-image">
+                <img src="${destinasi.gambar}" alt="${destinasi.nama}" onerror="this.src='/image/placeholder.jpg'">
+                <span class="result-card-badge">${kategoriLabels[destinasi.kategori]}</span>
+            </div>
+            <div class="result-card-content">
+                <h3 class="result-card-title">
+                    ${destinasi.nama}
+                    <span class="result-card-category" style="background: ${kategoriColors[destinasi.kategori]}20; color: ${kategoriColors[destinasi.kategori]};">${kategoriLabels[destinasi.kategori]}</span>
+                </h3>
+                <div class="result-card-location">
+                    <i class="fas fa-map-marker-alt"></i> ${destinasi.lokasi}
+                </div>
+                <p class="result-card-desc">${destinasi.deskripsi}</p>
+                <div class="result-card-tags">
+                    ${destinasi.tags.map(tag => `<span class="result-card-tag">${tag}</span>`).join('')}
+                </div>
+                <div class="result-card-footer">
+                    <div class="result-card-rating">
+                        <i class="fas fa-star"></i> ${destinasi.rating}
+                    </div>
+                    <a href="/destinasi/${destinasi.id}" class="result-card-btn">Lihat Detail →</a>
+                </div>
+            </div>
+        `;
+
+        return card;
+    }
+
+    // Reset search function
+    function resetSearch() {
+        searchInput.value = '';
+        currentSearch = '';
+        currentFilter = 'all';
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        document.querySelector('[data-filter="all"]').classList.add('active');
+        sortSelect.value = 'name';
+        currentSort = 'name';
+        renderResults();
+        searchInput.focus();
+    }
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Ctrl/Cmd + K to focus search
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+
+        // Escape to clear search
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+            resetSearch();
+        }
     });
 </script>
 

@@ -1,48 +1,65 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Galeri')
+@section('title', 'Tambah Informasi')
 
 @section('content')
-<div class="d-flex align-items-center mb-3">
-    <a href="{{ route('admin.galeri.index') }}" class="btn btn-sm btn-secondary me-2"><i class="fas fa-arrow-left"></i></a>
-    <h5 class="mb-0">Tambah Galeri</h5>
-</div>
-
-<div class="form-card">
-    <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label class="form-label">Judul</label>
-                <input type="text" name="judul" class="form-control" required>
+<div class="card">
+    <div class="card-header">
+        <h5>Tambah Informasi Baru</h5>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('admin.informasi.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label>Judul <span class="text-danger">*</span></label>
+                <input type="text" name="judul" class="form-control" value="{{ old('judul') }}" required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label">Kategori</label>
-                <select name="kategori" class="form-select" required>
-                    <option value="">Pilih</option>
-                    <option value="Balige">Balige</option>
-                    <option value="Meat">Meat</option>
-                    <option value="Batu Bahisan">Batu Bahisan</option>
-                    <option value="Liang Sipege">Liang Sipege</option>
+            <div class="mb-3">
+                <label>Kategori <span class="text-danger">*</span></label>
+                <select name="kategori" class="form-control" required>
+                    <option value="">Pilih Kategori</option>
+                    <option value="Geologi" {{ old('kategori') == 'Geologi' ? 'selected' : '' }}>Geologi</option>
+                    <option value="Budaya" {{ old('kategori') == 'Budaya' ? 'selected' : '' }}>Budaya</option>
+                    <option value="Wisata" {{ old('kategori') == 'Wisata' ? 'selected' : '' }}>Wisata</option>
+                    <option value="Transportasi" {{ old('kategori') == 'Transportasi' ? 'selected' : '' }}>Transportasi</option>
                 </select>
             </div>
-            <div class="col-12 mb-3">
-                <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" class="form-control" rows="3" required></textarea>
+            <div class="mb-3">
+                <label>Penulis</label>
+                <input type="text" name="penulis" class="form-control" value="{{ old('penulis', 'Admin') }}">
             </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label">Gambar</label>
-                <input type="file" name="gambar" class="form-control" accept="image/*" required>
+            <div class="mb-3">
+                <label>Konten <span class="text-danger">*</span></label>
+                <textarea name="konten" class="form-control" rows="6" required>{{ old('konten') }}</textarea>
             </div>
-            <div class="col-md-6 mb-3">
-                <div class="form-check mt-4">
-                    <input class="form-check-input" type="checkbox" name="status" value="1" checked>
+            <div class="mb-3">
+                <label>Gambar</label>
+                <input type="file" id="gambar" name="gambar" class="form-control" accept="image/*">
+                <div class="mt-3">
+                    <img id="informasiPreview" src="#" alt="Preview Gambar Informasi" class="img-fluid rounded d-none" style="max-width: 100%; max-height: 300px;" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="status" value="1" {{ old('status', true) ? 'checked' : '' }}>
                     <label class="form-check-label">Aktifkan</label>
                 </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('admin.informasi.index') }}" class="btn btn-secondary">Batal</a>
-    </form>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ route('admin.informasi.index') }}" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
 </div>
+<script>
+    document.getElementById('gambar').addEventListener('change', function (e) {
+        const preview = document.getElementById('informasiPreview');
+        const file = e.target.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('d-none');
+        } else {
+            preview.classList.add('d-none');
+        }
+    });
+</script>
 @endsection

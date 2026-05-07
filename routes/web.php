@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\InformasiController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\GeositeController;
 use App\Http\Controllers\HomeController;
 
 
@@ -27,40 +28,30 @@ Route::get('/informasi', function () {
     return view('pages.informasi', compact('informasi'));
 })->name('informasi');
 
-// Destinasi
-Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
+// Detail Informasi
+Route::get('/informasi/{slug}', function ($slug) {
+    $informasi = App\Models\Informasi::where('slug', $slug)->firstOrFail();
+    $informasi->increment('views');
+    return view('pages.informasi-detail', compact('informasi'));
+})->name('informasi.detail');
 
 // Detail Destinasi (jika masih pakai ID)
 Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
 
 // ==================== GEOSITE ROUTES (TIGA GEOSITE) ====================
-Route::get('/geosite/muara', function () {
-    return view('geosite.muara');
-})->name('geosite.muara');
+Route::get('/geosite/muara', [GeositeController::class, 'muara'])->name('geosite.muara');
 
-Route::get('/geosite/sibandang', function () {
-    return view('geosite.sibandang');
-})->name('geosite.sibandang');
+Route::get('/geosite/sibandang', [GeositeController::class, 'sibandang'])->name('geosite.sibandang');
 
-Route::get('/geosite/sampuran', function () {
-    return view('geosite.sampuran');
-})->name('geosite.sampuran');
+Route::get('/geosite/sampuran', [GeositeController::class, 'sampuran'])->name('geosite.sampuran');
 
-Route::get('/geosite/papande', function () {
-    return view('geosite.papande');
-})->name('geosite.papande');
+Route::get('/geosite/papande', [GeositeController::class, 'papande'])->name('geosite.papande');
 
 // Galeri
 Route::get('/galeri', function () {
-    $galeri = App\Models\Galeri::latest()->paginate(12);
+    $galeri = App\Models\Galeri::where('status', true)->latest()->paginate(12);
     return view('pages.galeri', compact('galeri'));
 })->name('galeri');
-
-
-
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::resource('galeri', GaleriController::class);
-});
 
 // Berita
 Route::get('/berita', function () {
@@ -99,6 +90,11 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
 // ==================== ADMIN ROUTES ====================
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -113,7 +109,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('berita', BeritaController::class)->names('admin.berita');
     Route::resource('informasi', InformasiController::class)->names('admin.informasi');
     Route::resource('banner', BannerController::class)->names('admin.banner');
+    Route::resource('destinasi', App\Http\Controllers\Admin\DestinasiController::class)->names('admin.destinasi');
     Route::post('galeri/toggle-status/{id}', [GaleriController::class, 'toggleStatus'])->name('admin.galeri.toggle-status');
+    Route::get('language/{lang}', [App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
 
     
 });

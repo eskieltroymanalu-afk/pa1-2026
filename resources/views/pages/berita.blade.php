@@ -452,8 +452,21 @@
 </div>
 
 <script>
-    // DATA BERITA KOSONG - NANTI DIISI DENGAN CRUD
-    const beritaData = [];
+    // DATA BERITA DARI DATABASE
+    const beritaData = @php
+        echo json_encode(collect($berita->items())->map(function($item) {
+            return [
+                'id' => $item->id,
+                'title' => $item->judul,
+                'excerpt' => strip_tags($item->konten),
+                'content' => $item->konten,
+                'image' => $item->gambar,
+                'date' => $item->tanggal_terbit ? $item->tanggal_terbit->format('d M Y') : $item->created_at->format('d M Y'),
+                'slug' => $item->slug,
+                'kategori' => $item->kategori ? $item->kategori->nama : 'Umum'
+            ];
+        })->all());
+    @endphp;
 
     let currentPage = 1;
     const itemsPerPage = 6;
@@ -487,7 +500,7 @@
         grid.innerHTML = beritaToShow.map(berita => `
             <div class="berita-card" onclick="openModal(${berita.id})">
                 <div class="berita-image">
-                    <img src="${berita.image}" alt="${berita.title}">
+                    <img src="${berita.image || '/image/placeholder.jpg'}" alt="${berita.title}" onerror="this.src='/image/placeholder.jpg'">
                 </div>
                 <div class="berita-content">
                     <span class="berita-date">${berita.date}</span>

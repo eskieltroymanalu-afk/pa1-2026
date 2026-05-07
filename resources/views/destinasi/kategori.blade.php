@@ -230,7 +230,45 @@
         color: #1a1a1a;
         gap: 15px;
     }
-    
+
+    /* ==================== SEARCH SECTION ==================== */
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+
+    .search-input {
+        width: 100%;
+        max-width: 700px;
+        border: 2px solid #e0e0e0;
+        padding: 15px 20px;
+        border-radius: 50px;
+        font-size: 1rem;
+        color: #1a1a1a;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #c6a43b;
+        box-shadow: 0 10px 30px rgba(198, 164, 59, 0.18);
+    }
+
+    .search-info {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .search-info span {
+        font-weight: 700;
+        color: #c6a43b;
+    }
+
     /* Empty State */
     .empty-state {
         grid-column: 1 / -1;
@@ -299,7 +337,13 @@
 <!-- ==================== DESTINASI GRID ==================== -->
 <section class="destinasi-section">
     <div class="container">
-        <div class="destinasi-grid">
+        <div class="search-bar" data-aos="fade-up">
+            <input type="text" id="destinasiSearch" class="search-input" placeholder="Cari destinasi, lokasi, atau tag...">
+        </div>
+        <div class="search-info" id="searchInfo" data-aos="fade-up" data-aos-delay="50">
+            Menampilkan <span id="searchCount">{{ count($destinasi) }}</span> destinasi di kategori <span>{{ $kategori }}</span>
+        </div>
+        <div class="destinasi-grid" id="destinasiGrid">
             @forelse($destinasi as $item)
             <div class="dest-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card-image">
@@ -313,7 +357,7 @@
                     </div>
                     <p class="card-desc">{{ $item->deskripsi }}</p>
                     <div class="card-tags">
-                        @foreach($item->tags as $tag)
+                        @foreach(json_decode($item->tags, true) ?? [] as $tag)
                         <span>#{{ $tag }}</span>
                         @endforeach
                     </div>
@@ -329,6 +373,11 @@
                 <p>Destinasi pada kategori ini akan segera ditambahkan.</p>
             </div>
             @endforelse
+            <div class="empty-state" id="searchEmptyState" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>Tidak ada destinasi yang cocok</h3>
+                <p>Coba kata kunci lain atau hapus filter pencarian untuk melihat semua destinasi.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -342,6 +391,40 @@
         duration: 800,
         once: true,
         offset: 50
+    });
+
+    const destinasiSearch = document.getElementById('destinasiSearch');
+    const destinasiGrid = document.getElementById('destinasiGrid');
+    const searchCount = document.getElementById('searchCount');
+    const searchInfo = document.getElementById('searchInfo');
+
+    destinasiSearch.addEventListener('input', function() {
+        const query = this.value.trim().toLowerCase();
+        const cards = destinasiGrid.querySelectorAll('.dest-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const title = card.querySelector('.card-title').textContent.toLowerCase();
+            const location = card.querySelector('.card-location').textContent.toLowerCase();
+            const description = card.querySelector('.card-desc').textContent.toLowerCase();
+            const tags = Array.from(card.querySelectorAll('.card-tags span')).map(tag => tag.textContent.toLowerCase());
+            const text = [title, location, description, ...tags].join(' ');
+            const match = query === '' || text.includes(query);
+
+            card.style.display = match ? 'block' : 'none';
+            if (match) visibleCount++;
+        });
+
+        searchCount.textContent = visibleCount;
+
+        const emptyState = destinasiGrid.querySelector('.empty-state');
+        if (emptyState) {
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        searchInfo.innerHTML = visibleCount > 0
+            ? `Menampilkan <span>${visibleCount}</span> destinasi di kategori <span>{{ $kategori }}</span>`
+            : 'Tidak ada destinasi yang cocok. Coba kata kunci lain.';
     });
 </script>
 
