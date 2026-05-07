@@ -1113,122 +1113,26 @@
     });
 
     // ==================== SEARCH & FILTER FUNCTIONALITY ====================
-    // Data destinasi
-    const destinasiData = [
-        // Alam
-        {
-            id: 1,
-            nama: 'Sibandang',
-            kategori: 'alam',
-            lokasi: 'Pulau Sibandang, Danau Toba',
-            deskripsi: 'Goa alami dengan stalaktit dan stalakmit yang indah. Tempat eksplorasi dan edukasi geologi.',
-            gambar: '/image/4.jpeg',
-            tags: ['Goa Alami', 'Caving', 'Stalaktit', 'Geologi'],
-            maps: 'https://maps.app.goo.gl/2TzrmRxH3eH3o2wb7',
-            rating: 4.9
-        },
-        {
-            id: 2,
-            nama: 'Muara',
-            kategori: 'alam',
-            lokasi: 'Pulau Sibandang, Danau Toba',
-            deskripsi: 'Formasi batuan unik hasil erosi ribuan tahun. Spot sunrise dan sunset.',
-            gambar: '/image/1.jpeg',
-            tags: ['Formasi Batuan', 'Sunrise', 'Sunset', 'Fotografi'],
-            maps: 'https://maps.app.goo.gl/gNVA2Do1HYFEM12u9',
-            rating: 4.8
-        },
-        {
-            id: 3,
-            nama: 'Papande',
-            kategori: 'alam',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Air terjun cantik dengan suasana asri untuk keluarga.',
-            gambar: '/image/2.jpeg',
-            tags: ['Air Terjun', 'Refreshing', 'Keluarga', 'Alam'],
-            maps: 'https://maps.app.goo.gl/DBtCfX47iXHNbHLT6',
-            rating: 4.7
-        },
-        {
-            id: 4,
-            nama: 'Sampuran',
-            kategori: 'alam',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Air terjun alami dengan air jernih dan suasana sejuk.',
-            gambar: '/image/3.jpeg',
-            tags: ['Air Terjun', 'Alam', 'Segar', 'Wisata'],
-            maps: 'https://maps.app.goo.gl/XvdBsMA1Y1JwTXC56',
-            rating: 4.6
-        },
-        // Buatan
-        {
-            id: 5,
-            nama: 'Patung Yesus Memberkati',
-            kategori: 'buatan',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Patung Yesus 30 meter dengan view Danau Toba.',
-            gambar: '/image/destinasi/patung-yesus.jpg',
-            tags: ['Patung', 'Ikon', 'Wisata Rohani', 'Spot Foto'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Patung+Yesus+Memberkati+Balige',
-            rating: 4.8
-        },
-        {
-            id: 6,
-            nama: 'Taman Lingga',
-            kategori: 'buatan',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Taman kota dengan view Danau Toba.',
-            gambar: '/image/destinasi/taman-lingga.jpg',
-            tags: ['Taman', 'Keluarga', 'Santai', 'Foto'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Taman+Lingga+Balige',
-            rating: 4.5
-        },
-        {
-            id: 7,
-            nama: 'Jembatan Toba',
-            kategori: 'buatan',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Jembatan ikonik dengan panorama Danau Toba.',
-            gambar: '/image/destinasi/jembatan-toba.jpg',
-            tags: ['Jembatan', 'Ikon', 'Sunset', 'Foto'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Jembatan+Toba+Balige',
-            rating: 4.7
-        },
-        // Budaya
-        {
-            id: 8,
-            nama: 'Meat Village',
-            kategori: 'budaya',
-            lokasi: 'Pulau Sibandang, Danau Toba',
-            deskripsi: 'Desa adat Batak dengan sejarah dan budaya.',
-            gambar: '/image/meat/hero.jpg',
-            tags: ['Desa Adat', 'Budaya', 'Ulos', 'Tari'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Meat+Village+Sibandang',
-            rating: 4.9
-        },
-        {
-            id: 9,
-            nama: 'Museum Batak',
-            kategori: 'budaya',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Museum sejarah Batak Toba.',
-            gambar: '/image/destinasi/museum-batak.jpg',
-            tags: ['Museum', 'Sejarah', 'Edukasi'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Museum+Batak+Balige',
-            rating: 4.6
-        },
-        {
-            id: 10,
-            nama: 'Desa Ulos Hutaraja',
-            kategori: 'budaya',
-            lokasi: 'Balige, Danau Toba',
-            deskripsi: 'Pusat tenun ulos khas Batak.',
-            gambar: '/image/destinasi/desa-ulos.jpg',
-            tags: ['Ulos', 'Kerajinan', 'UMKM'],
-            maps: 'https://www.google.com/maps/search/?api=1&query=Hutaraja+Balige',
-            rating: 4.8
+    // Data destinasi dari database
+    const destinasiData = @json($destinasi->map(function($item) {
+        $tags = $item->tags;
+        if (is_string($tags)) {
+            $tags = json_decode($tags, true) ?? [];
+        } elseif (is_null($tags)) {
+            $tags = [];
         }
-    ];
+        return [
+            'id' => $item->id,
+            'nama' => $item->nama,
+            'kategori' => strtolower($item->kategori),
+            'lokasi' => $item->lokasi,
+            'deskripsi' => $item->deskripsi,
+            'gambar' => $item->gambar,
+            'tags' => $tags,
+            'maps' => $item->maps,
+            'rating' => 4.5 // Default rating since not in DB
+        ];
+    }));
 
     // DOM elements
     const searchInput = document.getElementById('searchInput');

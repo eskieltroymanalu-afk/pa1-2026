@@ -357,7 +357,7 @@
                     </div>
                     <p class="card-desc">{{ $item->deskripsi }}</p>
                     <div class="card-tags">
-                        @foreach($item->tags as $tag)
+                        @foreach(json_decode($item->tags, true) ?? [] as $tag)
                         <span>#{{ $tag }}</span>
                         @endforeach
                     </div>

@@ -763,33 +763,17 @@
             <div class="divider"></div>
         </div>
         <div class="grid-3">
+            @foreach($umkm as $item)
             <div class="card">
-                <img src="{{ asset('uploads/del.jpeg') }}" class="card-img">
+                <img src="{{ asset($item->gambar) }}" class="card-img">
                 <div class="card-content">
-                    <h3>Tenun Ulos</h3>
-                    <p>Kain tenun khas Batak dengan motif tradisional.</p>
-                    <div class="card-location">📍 Desa Meat</div>
-                    <div class="card-contact">📞 [KONTAK_UMKM1]</div>
+                    <h3>{{ $item->nama }}</h3>
+                    <p>{{ $item->deskripsi }}</p>
+                    <div class="card-location">📍 {{ $item->lokasi }}</div>
+                    <div class="card-contact">📞 {{ $item->kontak }}</div>
                 </div>
             </div>
-            <div class="card">
-                <img src="{{ asset('uploads/A1.jpeg') }}" class="card-img">
-                <div class="card-content">
-                    <h3>Anyaman Bambu</h3>
-                    <p>Kerajinan tangan dari bambu.</p>
-                    <div class="card-location">📍 Desa Meat</div>
-                    <div class="card-contact">📞 [KONTAK_UMKM2]</div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="{{ asset('uploads/A2.JPG') }}" class="card-img">
-                <div class="card-content">
-                    <h3>Madu Hutan</h3>
-                    <p>Madu alami premium dari hutan sekitar.</p>
-                    <div class="card-location">📍 Kawasan Hutan</div>
-                    <div class="card-contact">📞 [KONTAK_UMKM3]</div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\InformasiController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\GeositeController;
 use App\Http\Controllers\HomeController;
 
 
@@ -27,25 +28,24 @@ Route::get('/informasi', function () {
     return view('pages.informasi', compact('informasi'));
 })->name('informasi');
 
+// Detail Informasi
+Route::get('/informasi/{slug}', function ($slug) {
+    $informasi = App\Models\Informasi::where('slug', $slug)->firstOrFail();
+    $informasi->increment('views');
+    return view('pages.informasi-detail', compact('informasi'));
+})->name('informasi.detail');
+
 // Detail Destinasi (jika masih pakai ID)
 Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
 
 // ==================== GEOSITE ROUTES (TIGA GEOSITE) ====================
-Route::get('/geosite/muara', function () {
-    return view('geosite.muara');
-})->name('geosite.muara');
+Route::get('/geosite/muara', [GeositeController::class, 'muara'])->name('geosite.muara');
 
-Route::get('/geosite/sibandang', function () {
-    return view('geosite.sibandang');
-})->name('geosite.sibandang');
+Route::get('/geosite/sibandang', [GeositeController::class, 'sibandang'])->name('geosite.sibandang');
 
-Route::get('/geosite/sampuran', function () {
-    return view('geosite.sampuran');
-})->name('geosite.sampuran');
+Route::get('/geosite/sampuran', [GeositeController::class, 'sampuran'])->name('geosite.sampuran');
 
-Route::get('/geosite/papande', function () {
-    return view('geosite.papande');
-})->name('geosite.papande');
+Route::get('/geosite/papande', [GeositeController::class, 'papande'])->name('geosite.papande');
 
 // Galeri
 Route::get('/galeri', function () {
