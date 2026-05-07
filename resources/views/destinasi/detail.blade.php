@@ -60,10 +60,10 @@
 </style>
 
 <!-- HERO -->
-<div class="hero-detail" style="background-image: url('{{ $destinasi['gambar'] }}')">
+<div class="hero-detail" style="background-image: url('{{ $destinasi->gambar }}')">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-        <h1 class="display-3 fw-bold">{{ $destinasi['nama'] }}</h1>
+        <h1 class="display-3 fw-bold">{{ $destinasi->nama }}</h1>
         <p class="lead">Geosite Danau Toba</p>
     </div>
 </div>
@@ -74,14 +74,14 @@
     <!-- DESKRIPSI -->
     <div class="card-custom mb-5">
         <h2 class="mb-3">Deskripsi</h2>
-        <p>{{ $destinasi['deskripsi'] }}</p>
+        <p>{{ $destinasi->deskripsi }}</p>
     </div>
 
     <!-- GALERI -->
     <div class="card-custom mb-5">
         <h2 class="mb-4">Galeri</h2>
         <div class="row gallery">
-            @foreach($destinasi['galeri'] as $img)
+            @foreach($destinasi->galeri as $img)
                 <div class="col-md-4 mb-3">
                     <img src="{{ $img }}" class="w-100">
                 </div>
@@ -94,7 +94,7 @@
         <h2 class="mb-3">Lokasi</h2>
 
         <iframe 
-            src="{{ $destinasi['embed_maps'] ?? $destinasi['maps'] }}"
+            src="{{ $destinasi->embed_maps ?? $destinasi->maps }}"
             width="100%" 
             height="400" 
             style="border:none;">
