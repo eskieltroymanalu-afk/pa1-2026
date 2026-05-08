@@ -238,23 +238,58 @@
         margin-bottom: 40px;
     }
 
-    .search-input {
+    .destinasi-search-input-wrapper {
+        position: relative;
         width: 100%;
-        max-width: 700px;
-        border: 2px solid #e0e0e0;
-        padding: 15px 20px;
-        border-radius: 50px;
-        font-size: 1rem;
-        color: #1a1a1a;
-        background: white;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
+        max-width: 320px;
     }
 
-    .search-input:focus {
-        outline: none;
-        border-color: #c6a43b;
-        box-shadow: 0 10px 30px rgba(198, 164, 59, 0.18);
+    .destinasi-search-input {
+        width: 100% !important;
+        border: 1.5px solid #ddd !important;
+        padding: 12px 48px 12px 16px !important;
+        border-radius: 40px !important;
+        font-size: 0.88rem !important;
+        color: #1a1a1a !important;
+        background: #fbfbfb !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+        transition: all 0.25s ease !important;
+    }
+
+    .destinasi-search-input::placeholder {
+        color: #999 !important;
+    }
+
+    .destinasi-search-input:focus {
+        outline: none !important;
+        border-color: #c6a43b !important;
+        box-shadow: 0 6px 18px rgba(198, 164, 59, 0.16) !important;
+    }
+
+    .destinasi-search-button {
+        position: absolute !important;
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 36px !important;
+        height: 36px !important;
+        border: none !important;
+        background: transparent !important;
+        color: #c6a43b !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        transition: background 0.2s ease !important;
+    }
+
+    .destinasi-search-button:hover {
+        background: rgba(198, 164, 59, 0.12) !important;
+    }
+
+    .destinasi-search-button i {
+        font-size: 1rem !important;
     }
 
     .search-info {
@@ -338,7 +373,12 @@
 <section class="destinasi-section">
     <div class="container">
         <div class="search-bar" data-aos="fade-up">
-            <input type="text" id="destinasiSearch" class="search-input" placeholder="Cari destinasi, lokasi, atau tag...">
+            <div class="destinasi-search-input-wrapper">
+                <input type="text" id="destinasiSearch" class="search-input destinasi-search-input" placeholder="Cari destinasi, lokasi, atau tag...">
+                <button type="button" class="search-button destinasi-search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
         <div class="search-info" id="searchInfo" data-aos="fade-up" data-aos-delay="50">
             Menampilkan <span id="searchCount">{{ count($destinasi) }}</span> destinasi di kategori <span>{{ $kategori }}</span>
