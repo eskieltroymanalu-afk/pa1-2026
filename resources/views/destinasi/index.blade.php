@@ -524,39 +524,60 @@
         align-items: center;
     }
 
-    .search-input-wrapper {
+    .destinasi-search-input-wrapper {
         position: relative;
         flex: 1;
-        min-width: 250px;
-        max-width: 400px;
+        min-width: 220px;
+        max-width: 320px;
     }
 
-    .search-input {
-        width: 100%;
-        padding: 10px 40px 10px 16px;
-        border: 2px solid #e0e0e0;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        background: white;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    .destinasi-search-input {
+        width: 100% !important;
+        padding: 12px 48px 12px 16px !important;
+        border: 1.5px solid #ddd !important;
+        border-radius: 40px !important;
+        font-size: 0.88rem !important;
+        line-height: 1.4 !important;
+        background: #fbfbfb !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
     }
 
-    .search-input:focus {
-        outline: none;
-        border-color: #c6a43b;
-        box-shadow: 0 2px 12px rgba(198, 164, 59, 0.15);
-        transform: none;
+    .destinasi-search-input::placeholder {
+        color: #999 !important;
     }
 
-    .search-icon {
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #c6a43b;
-        font-size: 1rem;
-        pointer-events: none;
+    .destinasi-search-input:focus {
+        outline: none !important;
+        border-color: #c6a43b !important;
+        box-shadow: 0 6px 20px rgba(198, 164, 59, 0.16) !important;
+        transform: none !important;
+    }
+
+    .destinasi-search-button {
+        position: absolute !important;
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 36px !important;
+        height: 36px !important;
+        border: none !important;
+        background: transparent !important;
+        color: #c6a43b !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        transition: background 0.2s ease !important;
+    }
+
+    .destinasi-search-button:hover {
+        background: rgba(198, 164, 59, 0.12) !important;
+    }
+
+    .destinasi-search-button i {
+        font-size: 1rem !important;
     }
 
     .filter-buttons {
@@ -901,9 +922,11 @@
         </div>
 
         <div class="search-filters" data-aos="fade-up" data-aos-delay="100">
-            <div class="search-input-wrapper">
-                <input type="text" class="search-input" id="searchInput" placeholder="Cari destinasi, lokasi, atau aktivitas...">
-                <i class="fas fa-search search-icon"></i>
+            <div class="destinasi-search-input-wrapper">
+                <input type="text" class="search-input destinasi-search-input" id="searchInput" placeholder="Cari destinasi, lokasi, atau aktivitas...">
+                <button type="button" class="search-button destinasi-search-button">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">Semua</button>
