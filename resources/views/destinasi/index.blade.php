@@ -527,35 +527,36 @@
     .search-input-wrapper {
         position: relative;
         flex: 1;
-        min-width: 300px;
-        max-width: 500px;
+        min-width: 250px;
+        max-width: 400px;
     }
 
     .search-input {
         width: 100%;
-        padding: 15px 50px 15px 20px;
+        padding: 10px 40px 10px 16px;
         border: 2px solid #e0e0e0;
-        border-radius: 50px;
-        font-size: 1rem;
+        border-radius: 25px;
+        font-size: 0.9rem;
         background: white;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .search-input:focus {
         outline: none;
         border-color: #c6a43b;
-        box-shadow: 0 4px 20px rgba(198, 164, 59, 0.2);
-        transform: translateY(-2px);
+        box-shadow: 0 2px 12px rgba(198, 164, 59, 0.15);
+        transform: none;
     }
 
     .search-icon {
         position: absolute;
-        right: 20px;
+        right: 14px;
         top: 50%;
         transform: translateY(-50%);
         color: #c6a43b;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        pointer-events: none;
     }
 
     .filter-buttons {
