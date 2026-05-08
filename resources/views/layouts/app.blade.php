@@ -233,6 +233,51 @@
             background: transparent;
             color: white;
         }
+
+        /* ===================== */
+        /* Search Form - Global  */
+        /* ===================== */
+        .navbar-search-form {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 0.1rem 0.5rem 0.1rem 0.75rem;
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .navbar-search-form:focus-within {
+            border-color: rgba(198, 164, 59, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .navbar-search-form input {
+            width: 110px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-size: 0.78rem;
+            padding: 0.15rem 0;
+        }
+        .navbar-search-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.78rem;
+        }
+        .navbar-search-form button {
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.1rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
+        }
+        .navbar-search-form button:hover {
+            color: #c6a43b;
+        }
         
         @media (max-width: 991px) {
             .navbar .container { padding: 0 15px; }
@@ -248,32 +293,16 @@
                 overflow-y: auto;
             }
             .nav-link { text-align: center; padding: 0.7rem !important; font-size: 0.9rem; }
+            /* Search Form override untuk mobile */
             .navbar-search-form {
-                display: flex;
-                align-items: center;
-                gap: 0.35rem;
-                border: 1px solid rgba(255, 255, 255, 0.4);
-                border-radius: 999px;
-                padding: 0.2rem 0.5rem;
-                background: rgba(255, 255, 255, 0.08);
+                width: 100%;
+                margin-top: 0.5rem;
+                padding: 0.15rem 0.6rem 0.15rem 0.85rem;
             }
             .navbar-search-form input {
-                width: 160px;
-                border: none;
-                outline: none;
-                background: transparent;
-                color: white;
-                padding: 0.35rem 0.4rem;
+                width: 100%;
+                font-size: 0.82rem;
             }
-            .navbar-search-form button {
-                border: none;
-                background: transparent;
-                color: white;
-                cursor: pointer;
-                font-size: 1rem;
-            }
-            .navbar-search-form button:hover { color: #c6a43b; }
-            .navbar-search-form input::placeholder { color: rgba(255, 255, 255, 0.7); }
             .dropdown-menu { background: rgba(0, 51, 102, 0.9); margin: 0.5rem 0; }
             .dropdown-item { text-align: center; }
         }
@@ -397,13 +426,15 @@
                         </a>
                     </li>
 
-                    <!-- Tombol Bahasa Toggle -->
+                    <!-- Search Form -->
                     <li class="nav-item ms-2 d-flex align-items-center">
                         <form class="navbar-search-form" action="{{ url('/search') }}" method="GET">
                             <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari..." aria-label="Pencarian">
                             <button type="submit" aria-label="Cari"><i class="fas fa-search"></i></button>
                         </form>
                     </li>
+
+                    <!-- Tombol Bahasa Toggle -->
                     <li class="nav-item ms-2 d-flex align-items-center">
                         <div class="lang-toggle" onclick="toggleLanguage()">
                             <span id="btnID" class="lang-btn active">ID</span>
