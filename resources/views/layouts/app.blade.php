@@ -248,6 +248,32 @@
                 overflow-y: auto;
             }
             .nav-link { text-align: center; padding: 0.7rem !important; font-size: 0.9rem; }
+            .navbar-search-form {
+                display: flex;
+                align-items: center;
+                gap: 0.35rem;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                border-radius: 999px;
+                padding: 0.2rem 0.5rem;
+                background: rgba(255, 255, 255, 0.08);
+            }
+            .navbar-search-form input {
+                width: 160px;
+                border: none;
+                outline: none;
+                background: transparent;
+                color: white;
+                padding: 0.35rem 0.4rem;
+            }
+            .navbar-search-form button {
+                border: none;
+                background: transparent;
+                color: white;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+            .navbar-search-form button:hover { color: #c6a43b; }
+            .navbar-search-form input::placeholder { color: rgba(255, 255, 255, 0.7); }
             .dropdown-menu { background: rgba(0, 51, 102, 0.9); margin: 0.5rem 0; }
             .dropdown-item { text-align: center; }
         }
@@ -372,6 +398,12 @@
                     </li>
 
                     <!-- Tombol Bahasa Toggle -->
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <form class="navbar-search-form" action="{{ url('/search') }}" method="GET">
+                            <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari..." aria-label="Pencarian">
+                            <button type="submit" aria-label="Cari"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
                     <li class="nav-item ms-2 d-flex align-items-center">
                         <div class="lang-toggle" onclick="toggleLanguage()">
                             <span id="btnID" class="lang-btn active">ID</span>
