@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\GeositeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 
 // ==================== FRONTEND ROUTES ====================
@@ -37,6 +38,7 @@ Route::get('/informasi/{slug}', function ($slug) {
 
 // Detail Destinasi (jika masih pakai ID)
 Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 // ==================== GEOSITE ROUTES (TIGA GEOSITE) ====================
 Route::get('/geosite/muara', [GeositeController::class, 'muara'])->name('geosite.muara');
