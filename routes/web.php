@@ -17,10 +17,10 @@ use App\Http\Controllers\SearchController;
 
 // Destinasi Routes
 Route::get('/destinasi', [DestinasiController::class, 'index'])->name('destinasi');
-Route::get('/destinasi/{slug}', [DestinasiController::class, 'show'])->name('destinasi.show');
-Route::get('/destinasi-kategori/alam', [DestinasiController::class, 'alam'])->name('destinasi.alam');
-Route::get('/destinasi-kategori/buatan', [DestinasiController::class, 'buatan'])->name('destinasi.buatan');
-Route::get('/destinasi-kategori/budaya', [DestinasiController::class, 'budaya'])->name('destinasi.budaya');
+Route::get('/destinasi/{id}', [DestinasiController::class, 'show'])->name('destinasi.show');
+Route::get('/destinasi/alam', [DestinasiController::class, 'alam'])->name('destinasi.alam');
+Route::get('/destinasi/buatan', [DestinasiController::class, 'buatan'])->name('destinasi.buatan');
+Route::get('/destinasi/budaya', [DestinasiController::class, 'budaya'])->name('destinasi.budaya');
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
