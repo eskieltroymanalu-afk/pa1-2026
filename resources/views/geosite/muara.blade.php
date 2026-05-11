@@ -768,7 +768,7 @@
                 <div class="card-content">
                     <h3>Tenun Ulos</h3>
                     <p>Kain tenun khas Batak dengan motif tradisional.</p>
-                    <div class="card-location">📍 Desa Meat</div>
+                    <div class="card-location">📍Muara, Huta Nagodang </div>
                     <div class="card-contact">📞 [KONTAK_UMKM1]</div>
                 </div>
             </div>
@@ -805,28 +805,41 @@
             <div class="card">
                 <img src="{{ asset('uploads/A3.JPG') }}" class="card-img">
                 <div class="card-content">
-                    <h3>Homestay Putih</h3>
+                    <h3>Hotel Libra</h3>
                     <p>Menginap di rumah adat Batak.</p>
                     <div class="card-price">💰 [HARGA1] / malam</div>
                     <div class="card-contact">📞 [KONTAK_HOMESTAY]</div>
+                    <div class="card-address">📍 [ALAMAT_LODGE]</div>
                 </div>
             </div>
             <div class="card">
                 <img src="{{ asset('uploads/A4.JPG') }}" class="card-img">
                 <div class="card-content">
-                    <h3>Homestay Desa Sampuran</h3>
+                    <h3>Hotel Muara Nauli</h3>
                     <p>Pemandangan langsung Danau Toba.</p>
                     <div class="card-price">💰 [HARGA2] / malam</div>
-                    <div class="card-contact">📞 [KONTAK_LAKEVIEW]</div>
+                    <div class="card-contact">📞 [085361006767]</div>
+                    <div class="card-address">📍 [Jl. Sisingamangaraja No.1, Hutana Godang, Kec. Muara, Muara Tapanuli Utara, Sumatera Utara 22312]</div>
                 </div>
             </div>
             <div class="card">
                 <img src="{{ asset('uploads/A5.JPG') }}" class="card-img">
                 <div class="card-content">
-                    <h3>Meat Traditional Lodge</h3>
+                    <h3>Villa Marsaulina </h3>
                     <p>Tradisional dengan fasilitas modern.</p>
                     <div class="card-price">💰 [HARGA3] / malam</div>
-                    <div class="card-contact">📞 [KONTAK_LODGE]</div>
+                    <div class="card-contact">📞 [081380002791]</div>
+                    <div class="card-address">📍 [Jalan, Kec. Muara, Kabupaten Tapanuli Utara, Sumatera Utara 22476]</div>
+                </div>
+            </div>
+             <div class="card">
+                <img src="{{ asset('uploads/A5.JPG') }}" class="card-img">
+                <div class="card-content">
+                    <h3>GNB Lake Ressort/ Sentosa Lake Ressort</h3>
+                    <p>Tradisional dengan fasilitas modern.</p>
+                    <div class="card-price">💰 [HARGA3] / malam</div>
+                    <div class="card-contact">📞 [081375533336]</div>
+                    <div class="card-address">📍 [Hutana Godang, Kabupaten Tapanuli Utara, Sumatera Utara 22476]</div>
                 </div>
             </div>
         </div>
@@ -837,56 +850,32 @@
 <section id="fasilitas" class="section bg-light">
     <div class="container">
         <div class="section-title">
-            <h2>Fasilitas</h2>
+            <h2>Akomodasi & Transportasi</h2>
             <div class="divider"></div>
         </div>
         <div class="grid-2">
             <div class="fasilitas-item">
                 <img src="{{ asset('uploads/A1.jpeg') }}" class="fasilitas-img">
                 <div class="fasilitas-content">
-                    <h4>Area Parkir</h4>
+                    <h4>Pelabuhan</h4>
                     <p>Luas dan aman</p>
-                    <div class="fasilitas-price">[PARKIR]</div>
-                </div>
-            </div>
-            <div class="fasilitas-item">
-                <img src="{{ asset('uploads/A2.JPG') }}" class="fasilitas-img">
-                <div class="fasilitas-content">
-                    <h4>Toilet</h4>
-                    <p>Bersih</p>
-                    <div class="fasilitas-price">[TOILET]</div>
+                    <div class="fasilitas-price">[Pelabuhan Milik Pemerintah]</div>
                 </div>
             </div>
             <div class="fasilitas-item">
                 <img src="{{ asset('uploads/A3.JPG') }}" class="fasilitas-img">
                 <div class="fasilitas-content">
-                    <h4>Warung Makan</h4>
-                    <p>Kuliner khas</p>
-                    <div class="fasilitas-price">Mulai [WARUNG]</div>
+                    <h4>Rumah Makan</h4>
+                    <p>Kuliner khas Batak</p>
+                    <div class="fasilitas-price">[Rumah Makan]</div>
                 </div>
             </div>
             <div class="fasilitas-item">
                 <img src="{{ asset('uploads/A4.JPG') }}" class="fasilitas-img">
                 <div class="fasilitas-content">
-                    <h4>Area Camping</h4>
-                    <p>View danau</p>
-                    <div class="fasilitas-price">[CAMPING]</div>
-                </div>
-            </div>
-            <div class="fasilitas-item">
-                <img src="{{ asset('uploads/A5.JPG') }}" class="fasilitas-img">
-                <div class="fasilitas-content">
-                    <h4>Spot Foto</h4>
-                    <p>Instagramable</p>
-                    <div class="fasilitas-price">Gratis</div>
-                </div>
-            </div>
-            <div class="fasilitas-item">
-                <img src="{{ asset('uploads/A6.JPG') }}" class="fasilitas-img">
-                <div class="fasilitas-content">
-                    <h4>Musholla</h4>
-                    <p>Tempat ibadah</p>
-                    <div class="fasilitas-price">Gratis</div>
+                    <h4>Ressto Sederhana</h4>
+                    <p>Kuliner khas Padang</p>
+                    <div class="fasilitas-price">[Rumah Makan]</div>
                 </div>
             </div>
         </div>
