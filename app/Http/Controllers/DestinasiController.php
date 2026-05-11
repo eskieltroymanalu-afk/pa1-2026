@@ -13,9 +13,10 @@ class DestinasiController extends Controller
         return view('destinasi.index', compact('destinasi'));
     }
 
-    public function show($id)
+    public function show(Destinasi $destinasi)
     {
-        $destinasi = Destinasi::where('status', true)->findOrFail($id);
+        // Increment views
+        $destinasi->increment('views');
 
         // Tambahkan galeri jika ada
         $destinasi->galeri = [
